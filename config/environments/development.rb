@@ -3,6 +3,7 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   
   config.hosts << "11bc38c87f79421ca0031a3b952e0307.vfs.cloud9.us-east-1.amazonaws.com"
+  config.web_console.permissions = '131.227.23.35'
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time

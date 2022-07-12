@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root 'init_pages#first'
+#  get 'init_pages/first'
+#  get 'init_pages/policy'
+  get 'policy', to: 'init_pages#policy' 
 end

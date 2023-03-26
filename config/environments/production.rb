@@ -1,8 +1,28 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  config.action_mailer.default_url_options = {host: "11bc38c87f79421ca0031a3b952e0307.vfs.cloud9.us-east-1.amazonaws.com", protocol: "https"}
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.action_mailer.smtp_settings = {
+    port: 587,
+    address: "email-smtp.us-east-1.amazonaws.com",
+    user_name: "AKIARG2GUG3FALP3VIHH",
+    password: "BIXQ1GXFfmleAKIRjnl6Cy0mwjf1y49wgNs3/31MRVKM",
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
+  
+Rails.application.config.middleware.use ExceptionNotification::Rack,
+    email: {
+      deliver_with: :deliver, # Rails >= 4.2.1 do not need this option since it defaults to :deliver_now
+      email_prefix: "[PREFIX] ",
+      sender_address: %("CyberLearn Error" <cyber.learn.fyp@gmail.com>),
+      exception_recipients: %w[niallcanning18@gmail.com]
+    }
   # Code is not reloaded between requests.
   config.cache_classes = true
 

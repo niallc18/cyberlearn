@@ -3,9 +3,17 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   
   config.hosts << "11bc38c87f79421ca0031a3b952e0307.vfs.cloud9.us-east-1.amazonaws.com"
-  config.web_console.permissions = '131.227.23.35'
+  config.web_console.permissions = '81.154.41.169'
+  config.action_mailer.default_url_options = { host: 'https://11bc38c87f79421ca0031a3b952e0307.vfs.cloud9.us-east-1.amazonaws.com'}
   # Settings specified here will take precedence over those in config/application.rb.
-
+  config.action_mailer.smtp_settings = {
+    port: 587,
+    address: "email-smtp.us-east-1.amazonaws.com",
+    user_name: "AKIARG2GUG3FALP3VIHH",
+    password: "BIXQ1GXFfmleAKIRjnl6Cy0mwjf1y49wgNs3/31MRVKM",
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.

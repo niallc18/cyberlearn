@@ -1,0 +1,18 @@
+.container
+  -# frozen_string_literal: true
+  = simple_form_for(@course) do |f|
+    = f.error_notification
+    = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+    .form-inputs
+      = f.input :title
+      = f.label :description
+      = f.rich_text_area :description
+      /= f.input :details, collection: ['Free']
+      /= f.input :stage, collection: ['Newbie', 'Amateur', 'Expert']
+      = f.input :details, collection: Course.details, include_blank: true
+      = f.input :stage, collection: Course.stage, include_blank: true
+
+
+    .form-actions
+      = f.button :submit

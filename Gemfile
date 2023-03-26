@@ -22,6 +22,13 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem "haml-rails", "~> 2.0"
+gem "simple_form"
+gem "devise"
+gem "friendly_id", "~> 5.2.4"
+gem "ransack"
+gem "rolify"
+gem "pundit"
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

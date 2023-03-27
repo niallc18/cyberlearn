@@ -17,6 +17,10 @@
             = link_to courses_path, class: 'nav-link' do
               .fa.fa-book
               Courses
+          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(admissions_path)}"}
+            = link_to admissions_path, class: 'nav-link' do
+              .fa.fa-check
+              Admission
           %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_course_path)}"}
             = link_to new_course_path, class: 'nav-link' do
               .fa.fa-plus

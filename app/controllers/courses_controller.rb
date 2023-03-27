@@ -2,7 +2,6 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   def index
     @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
-    #@courses = @ransack_courses.result.includes(:user)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
   end
 
@@ -60,6 +59,6 @@ class CoursesController < ApplicationController
       @course = Course.friendly.find(params[:id])
     end
     def course_params
-      params.require(:course).permit(:title, :description, :short_description, :price, :language, :level)
+      params.require(:course).permit(:title, :description, :details, :stage)
     end
 end

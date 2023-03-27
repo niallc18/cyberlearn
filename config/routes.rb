@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :courses do
     resources :lessons
   end
+  resources :admissions
   resources :users, only: [:index, :edit, :show, :update]
   root 'init_pages#first'
   get 'init_pages/first'

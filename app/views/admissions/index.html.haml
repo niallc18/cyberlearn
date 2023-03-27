@@ -1,0 +1,29 @@
+%h1 Current Admissions
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Course
+      %th User
+      %th Rating
+      %th Review
+      %th Course Fee
+      %th
+      %th
+      %th
+
+  %tbody
+    - @admissions.each do |admission|
+      %tr
+        %td= admission.course
+        %td= admission.user
+        %td= admission.rating
+        %td= admission.review
+        %td= admission.course.details
+        %td= link_to 'Show', admission
+        %td= link_to 'Edit', edit_admission_path(admission)
+        %td= link_to 'Destroy', admission, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Admission', new_admission_path

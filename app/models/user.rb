@@ -4,6 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable, :confirmable
   rolify       
+  
+  has_many :courses
+  has_many :admission
+  
   def to_s
   email  
   end
@@ -12,11 +16,8 @@ class User < ApplicationRecord
     self.email.split(/@/).first
   end
   
-  has_many :courses
-  
   extend FriendlyId
   friendly_id :email, use: :slugged
-
 
   after_create :assign_default_role
 

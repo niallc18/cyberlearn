@@ -2,7 +2,8 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   def index
     @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
-    @courses = @ransack_courses.result.includes(:user)
+    #@courses = @ransack_courses.result.includes(:user)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
   end
 
   def show

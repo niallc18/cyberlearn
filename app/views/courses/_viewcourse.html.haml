@@ -9,8 +9,7 @@
     .fa.fa-book
     = course.lessons.count
   .card-footer
-    Course Fee:
-    = course.details
+    = admission_button(course)
     %br
     Level of Difficulty:
     = course.stage

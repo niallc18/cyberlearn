@@ -1,5 +1,12 @@
-%h1 New admission
-
-= render 'form'
-
-= link_to 'Back', admissions_path
+.card
+  .card-header
+    %h1
+      .fa.fa-check
+      = link_to @course.title, course_path(@course)
+      %hr
+      Register
+  .card-body
+    = form_tag course_admissions_path(@course) do
+      = submit_tag "#{@course.details}", class: 'btn btn-lg btn-success'
+  .card-footer
+    = link_to 'Back', course_path(@course)

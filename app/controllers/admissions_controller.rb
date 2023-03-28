@@ -1,5 +1,6 @@
 class AdmissionsController < ApplicationController
   before_action :set_admission, only: %i[ show edit update destroy ]
+  before_action :set_coruse, only: [:new, :create]
 
   # GET /admissions or /admissions.json
   def index
@@ -21,16 +22,9 @@ class AdmissionsController < ApplicationController
 
   # POST /admissions or /admissions.json
   def create
-    @admission = Admission.new(admission_params)
-    respond_to do |format|
-      if @admission.save
-        format.html { redirect_to admission_url(@admission), notice: "Admission was successfully created." }
-        format.json { render :show, status: :created, location: @admission }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @admission.errors, status: :unprocessable_entity }
-      end
-    end
+      @admission = current_user.admit_course(@course)
+      redirect_to course_path(@course), notice: "Admitted"
+    
   end
 
   # PATCH/PUT /admissions/1 or /admissions/1.json
@@ -58,12 +52,16 @@ class AdmissionsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_coruse
+      @course = Course.friendly.find(params[:course_id])
+    end
+    
     def set_admission
       @admission = Admission.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def admission_params
-      params.require(:admission).permit(:course_id, :user_id, :rating, :review)
+      params.require(:admission).permit(:rating, :review)
     end
 end

@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
+  resources :admissions
   resources :courses do
     resources :lessons
+    resources :admissions, only: [:new, :create]
   end
-  resources :admissions
   resources :users, only: [:index, :edit, :show, :update]
   root 'init_pages#first'
   get 'init_pages/first'

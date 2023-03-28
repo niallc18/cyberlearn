@@ -24,5 +24,9 @@ class Course < ApplicationRecord
   def self.stage
     STAGE.map { |stage| [stage, stage] }
   end
+  
+  def admitted(user)
+    self.admissions.where(user_id: [user.id], course_id: [self.id].empty?)
+  end
 
 end 

@@ -20,7 +20,7 @@ class Admission < ApplicationRecord
   end
   
   after_save do
-    unless rating.zero? || rating.nil?
+    unless rating.nil?
       course.update_avg
     end
   end

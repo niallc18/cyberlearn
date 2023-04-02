@@ -7,7 +7,12 @@
     = course.description
   .card-footer
     .fa.fa-book
+    Lessons:
     = course.lessons.count
+    %br
+    Total Users:
+    = course.admission.count
+    %br
   .card-footer
     = admission_button(course)
     .row

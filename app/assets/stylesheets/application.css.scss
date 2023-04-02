@@ -4,3 +4,12 @@
 @import "./actiontext.scss";
 
 
+.badge.badge-danger {
+  background-color: red !important;
+  color: white;
+}
+
+.badge.badge-info {
+  background-color: #17a2b8 !important;
+  color: white;
+}

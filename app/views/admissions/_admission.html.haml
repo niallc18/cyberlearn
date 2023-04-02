@@ -1,0 +1,17 @@
+.card
+  .card-header
+    .fa.fa-user
+    = link_to admission.user.username, user_path(admission.user)
+    .fa.fa-clock
+    = time_ago_in_words(admission.updated_at)
+    .fa.fa-graduation-cap
+    = link_to admission.course, course_path(admission.course)
+  .card-body
+    .text-warning.fa.fa-star
+    %b= admission.rating
+    .fa.fa-comment
+    %small= admission.review
+  - if current_user
+    .card-footer
+      - if policy(admission).edit?
+        = link_to 'Edit Review', edit_admission_path(admission)

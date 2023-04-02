@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :admissions
+  resources :admissions do
+    get :admitted_students, on: :collection
+  end
   resources :courses do
+    get :registered, :my_courses, on: :collection
     resources :lessons
     resources :admissions, only: [:new, :create]
   end

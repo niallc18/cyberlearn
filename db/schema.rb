@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_27_192601) do
+ActiveRecord::Schema.define(version: 2023_04_02_200846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,7 +61,9 @@ ActiveRecord::Schema.define(version: 2023_03_27_192601) do
     t.integer "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
     t.index ["course_id"], name: "index_admissions_on_course_id"
+    t.index ["slug"], name: "index_admissions_on_slug", unique: true
     t.index ["user_id"], name: "index_admissions_on_user_id"
   end
 
@@ -74,6 +76,7 @@ ActiveRecord::Schema.define(version: 2023_03_27_192601) do
     t.string "slug"
     t.text "details"
     t.string "stage"
+    t.float "rating_avg", default: 0.0, null: false
     t.index ["slug"], name: "index_courses_on_slug", unique: true
     t.index ["user_id"], name: "index_courses_on_user_id"
   end

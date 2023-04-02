@@ -10,6 +10,11 @@
     = course.lessons.count
   .card-footer
     = admission_button(course)
+    .row
+    = review_button(course)
+  .card-footer
+    .text-warning.fa.fa-star
+    %b= course.rating_avg
     %br
     Level of Difficulty:
     = course.stage

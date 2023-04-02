@@ -1,7 +1,16 @@
-%h1 Editing admission
+.card
+  .card-header
+    %h3
+    
+      .text-warning.fa.fa-star
+      Add Review
+      
+    %p
+  .card-body
+    = render 'form'
+  .card-footer
 
-= render 'form'
 
-= link_to 'Show', @admission
+= link_to 'Show Reviews', @admission
 \|
-= link_to 'Back', admissions_path
+= link_to 'Back', course_path(@admission.course)

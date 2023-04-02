@@ -26,7 +26,15 @@ class Course < ApplicationRecord
   end
   
   def admitted(user)
-    self.admissions.where(user_id: [user.id], course_id: [self.id].empty?)
+    self.admission.where(user_id: [user.id], course_id: [self.id]).empty?
+  end
+  
+  def update_avg
+    if admission.any? && admission.where.not(rating: nil).any?
+      update_column :rating_avg, (admission.average(:rating).round(2).to_f)
+    else
+      update_column :rating_avg, (0)
+    end
   end
 
 end 

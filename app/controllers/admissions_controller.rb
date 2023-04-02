@@ -4,7 +4,17 @@ class AdmissionsController < ApplicationController
 
   # GET /admissions or /admissions.json
   def index
-    @admissions = Admission.all
+    @ransack_path = admissions_path
+    @q = Admission.ransack(params[:q])
+    @pagy, @admissions = pagy(@q.result.includes(:user))
+    authorize @admissions
+  end
+  
+  def admitted_students
+    @ransack_path = admitted_students_admissions_path
+    @q = Admission.joins(:course).where(courses: {user: current_user}).ransack(params[:q])
+    @pagy, @admissions = pagy(@q.result.includes(:user))
+    render 'index'
   end
 
   # GET /admissions/1 or /admissions/1.json
@@ -18,6 +28,7 @@ class AdmissionsController < ApplicationController
 
   # GET /admissions/1/edit
   def edit
+    authorize @admission
   end
 
   # POST /admissions or /admissions.json
@@ -29,6 +40,7 @@ class AdmissionsController < ApplicationController
 
   # PATCH/PUT /admissions/1 or /admissions/1.json
   def update
+    authorize @admission
     respond_to do |format|
       if @admission.update(admission_params)
         format.html { redirect_to admission_url(@admission), notice: "Admission was successfully updated." }
@@ -42,8 +54,8 @@ class AdmissionsController < ApplicationController
 
   # DELETE /admissions/1 or /admissions/1.json
   def destroy
+    authorize @admission
     @admission.destroy
-
     respond_to do |format|
       format.html { redirect_to admissions_url, notice: "Admission was successfully destroyed." }
       format.json { head :no_content }
@@ -57,7 +69,7 @@ class AdmissionsController < ApplicationController
     end
     
     def set_admission
-      @admission = Admission.find(params[:id])
+      @admission = Admission.friendly.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

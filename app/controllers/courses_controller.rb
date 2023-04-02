@@ -1,9 +1,25 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   def index
+    @ransack_path = courses_path
     @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
   end
+  
+  def registered
+    @ransack_path = registered_courses_path
+    @ransack_courses = Course.joins(:admission).where(admission: {user: current_user}).ransack(params[:courses_search], search_key: :courses_search)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    render 'index'
+  end
+  
+  def my_courses
+    @ransack_path = my_courses_courses_path
+    @ransack_courses = Course.where(user: current_user).ransack(params[:courses_search], search_key: :courses_search)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    render 'index'
+  end
+  
 
   def show
     @lessons = @course.lessons

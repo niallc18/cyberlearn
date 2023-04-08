@@ -7,6 +7,7 @@ class User < ApplicationRecord
   
   has_many :courses
   has_many :admission
+  has_many :user_progressions
   
   def to_s
   email  
@@ -39,6 +40,12 @@ class User < ApplicationRecord
 
   def admit_course(course)
     self.admission.create(course: course, price: course.details)
+  end
+  
+  def lesson_seen(lesson)
+    unless self.user_progressions.where(lesson: lesson).any?
+      self.user_progressions.create(lesson: lesson)
+    end
   end
 
   private

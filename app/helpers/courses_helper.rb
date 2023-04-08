@@ -4,7 +4,10 @@ module CoursesHelper
       if course.user == current_user
         link_to "View details", course_path(course)
       elsif course.admission.where(user: current_user).any?
-        link_to "Already admitted", course_path(course)
+        link_to course_path(course) do
+          raw("My Progress: ") +
+          number_to_percentage(course.progression(current_user), precision: 0) #progession for lessons as percentage
+        end
       else
         link_to "Free", new_course_admission_path(course), class: 'btn btn-success'
       end

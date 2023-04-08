@@ -3,6 +3,12 @@
 %p
 .card
   .card-header
+    - if lesson.seen(current_user) == true
+      .text-success.far.fa-check-circle
+      /seen
+    - else
+      .text-danger.far.fa-times-circle
+      /not seen
     = link_to lesson.title, course_lesson_path(@course, lesson)
   - if policy(lesson).show?
     .card-body

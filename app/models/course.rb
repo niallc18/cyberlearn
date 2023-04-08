@@ -7,6 +7,7 @@ class Course < ApplicationRecord
   belongs_to :user
   has_many :admission
   has_many :lessons, dependent: :destroy
+  has_many :user_progressions, through: :lessons
 
   scope :trending_courses, -> { limit(4).order(rating_avg: :desc, created_at: :desc) }
   scope :new_courses, -> { limit(4).order(created_at: :desc) }
@@ -39,6 +40,12 @@ class Course < ApplicationRecord
       update_column :rating_avg, (admission.average(:rating).round(2).to_f)
     else
       update_column :rating_avg, (0)
+    end
+  end
+  
+  def progression(user)
+    unless self.lessons.count == 0
+      user_progressions.where(user: user).count/self.lessons.count.to_f*100
     end
   end
 

@@ -10,6 +10,8 @@ class LessonsController < ApplicationController
   # GET /lessons/1
   # GET /lessons/1.json
   def show
+    authorize @lesson
+    current_user.lesson_seen(@lesson)
   end
 
   # GET /lessons/new

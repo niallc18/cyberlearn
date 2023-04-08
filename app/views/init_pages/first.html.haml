@@ -1,3 +1,4 @@
+%p
 .jumbotron.text-info
   .display-4
     Start your journey within Cyber Security!
@@ -21,16 +22,7 @@
     Trending courses
     %p
   .card-columns{style: "display: inline-block; flex-wrap: wrap; justify-content: space-between; width: 100%; overflow: auto; margin: 0 auto;" }
-    - @courses.each do |course|
-      = render 'courses/viewcourse', course: course
-  
-  %hr.text-info
-  %h2.text-info
-    .fa.fa-circle-check
-    Top courses
-    %p
-  .card-columns{style: "display: inline-block; flex-wrap: wrap; justify-content: space-between; width: 100%; overflow: auto; margin: 0 auto;" }
-    - @courses.each do |course|
+    - @trending_courses.each do |course|
       = render 'courses/viewcourse', course: course
   
   %hr.text-info
@@ -39,7 +31,7 @@
     New courses
     %p
   .card-columns{style: "display: inline-block; flex-wrap: wrap; justify-content: space-between; width: 100%; overflow: auto; margin: 0 auto;" }
-    - @latest_courses.each do |course|
+    - @new_courses.each do |course|
       = render 'courses/viewcourse', course: course
   
   %hr

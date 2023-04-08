@@ -7,6 +7,9 @@ class Course < ApplicationRecord
   belongs_to :user
   has_many :admission
   has_many :lessons, dependent: :destroy
+
+  scope :trending_courses, -> { limit(4).order(rating_avg: :desc, created_at: :desc) }
+  scope :new_courses, -> { limit(4).order(created_at: :desc) }
   
   
   def to_s

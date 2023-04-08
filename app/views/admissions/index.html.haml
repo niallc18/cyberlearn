@@ -57,20 +57,20 @@
           = sort_link(@q, :created_at)
           /.fa.fa-clock
           /.fa.fa-lock-open
-          /bought
+          /date 
         %th
           = sort_link(@q, :course_title)
           /.fa.fa-graduation-cap
-          /Course
+          /Course name
         %th 
           = sort_link(@q, :cost)
           /.fa.fa-dollar-sign
-          /Price
+          /Cost
         %th 
           = sort_link(@q, :updated_at)
           /.row
           /.text-warning.fa.fa-clock
-          /Reviewed on
+          /Updated
         %th 
           = sort_link(@q, :rating)
           /.text-warning.fa.fa-star

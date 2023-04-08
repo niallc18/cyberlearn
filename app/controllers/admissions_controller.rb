@@ -1,6 +1,6 @@
 class AdmissionsController < ApplicationController
   before_action :set_admission, only: %i[ show edit update destroy ]
-  before_action :set_coruse, only: [:new, :create]
+  before_action :set_course, only: [:new, :create]
 
   # GET /admissions or /admissions.json
   def index
@@ -64,7 +64,7 @@ class AdmissionsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_coruse
+    def set_course
       @course = Course.friendly.find(params[:course_id])
     end
     

@@ -39,6 +39,8 @@
                 = link_to registered_courses_path, class: "dropdown-item" do
                   .fa.fa-graduation-cap
                   My Courses
+                  .badge.badge-danger
+                    = current_user.admission.count
           - if current_user.has_role?(:teacher)
             %li.nav-item.dropdown
               %a#teacherDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
@@ -51,9 +53,7 @@
                   New Course
                 = link_to my_courses_courses_path, class: "dropdown-item" do
                   .fa.fa-graduation-cap
-                  My courses
-                  .badge.badge-danger
-                    = current_user.admission.count
+                  My Courses
                 = link_to admitted_students_admissions_path, class: "dropdown-item" do
                   .fa.fa-users
                   Students

@@ -1,6 +1,6 @@
 class Lesson < ApplicationRecord
   belongs_to :course
-  has_many :user_progressions
+  has_many :user_progressions, dependent: :destroy
   validates :title, :info, :course, presence: true
 
   extend FriendlyId

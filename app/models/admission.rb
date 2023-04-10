@@ -10,6 +10,7 @@ class Admission < ApplicationRecord
   validates_uniqueness_of :course_id, scope: :user_id
   
   scope :review_needed, -> { where(rating: [0, nil, ""], review: [0, nil, ""]) }
+  scope :has_review, -> { where.not(rating: [0, nil, ""]) }
   
   extend FriendlyId
   friendly_id :to_s, use: :slugged

@@ -23,6 +23,7 @@ class CoursesController < ApplicationController
 
   def show
     @lessons = @course.lessons
+    @admissions_review = @course.admission.has_review
   end
   def new
     @course = Course.new

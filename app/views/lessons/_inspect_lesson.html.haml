@@ -1,0 +1,6 @@
+%li.list-group-item
+  - if lesson.seen(current_user) == true
+    .text-success.far.fa-check-circle
+  - else
+    .text-danger.far.fa-times-circle
+  = link_to lesson.title, course_lesson_path(@course, lesson)

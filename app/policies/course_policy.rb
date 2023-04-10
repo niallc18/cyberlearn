@@ -20,6 +20,10 @@ class CoursePolicy < ApplicationPolicy
   def create?
     @user.has_role?(:teacher)
   end
+  
+  def creator?
+    @record.user == @user
+  end
 
   def destroy?
     @user.has_role?(:admin) || @record.user_id == @user.id

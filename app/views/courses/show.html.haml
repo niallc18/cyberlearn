@@ -1,13 +1,43 @@
 = link_to 'Courses', courses_path
 \/
 = link_to @course.title, course_path(@course)
-
+%p
 .row
-  .col-lg-6
-    = render 'courses/viewcourse', course: @course
-  .col-lg-6
-    - if policy(@course).edit?
-      = link_to 'Add lesson', new_course_lesson_path(@course, @lesson), class: 'btn btn-primary btn-sm btn-block'
-      %p
-    - @lessons.each do |lesson|
-      = render 'lessons/lesson', lesson: lesson
+  .col-lg-7
+    .jumbotron
+    %h1
+      = @course.title
+    %h4
+      = @course.description
+    %br
+    %h4
+      Lessons:
+      = @course.lessons.count
+    %ul.list-group
+      - @lessons.each do |lesson|
+        = render 'lessons/inspect_lesson', lesson: lesson
+
+    %br
+
+    %h4
+      Course Reviews:
+      = @admissions_review.count
+
+    - @admissions_review.each do |admission|
+      = render 'admissions/admission', admission: admission
+      
+    %p
+    %h4
+      .float-right
+        My Progress:
+        = number_to_percentage(@course.progression(current_user), precision: 0)
+    
+  .col-lg-5
+    //- if policy(@course).edit?
+    //= link_to 'Add lesson', new_course_lesson_path(@course, @lesson), class: 'btn btn-primary btn-sm btn-block'
+    %p
+    .sticky-top
+      = render 'courses/viewcourse', course: @course
+    %p
+
+

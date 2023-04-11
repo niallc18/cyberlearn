@@ -12,7 +12,7 @@ module CoursesHelper
         link_to "Free", new_course_admission_path(course), class: 'btn btn-success'
       end
     else
-      link_to "Details", course_path(course), class: "btn btn-md btn-success"
+      link_to "Details", new_course_admission_path(course), class: "btn btn-md btn-success"
     end
   end
   

@@ -4,7 +4,11 @@ Rails.application.routes.draw do
     get :admitted_students, on: :collection
   end
   resources :courses do
-    get :registered, :my_courses, on: :collection
+    get :registered, :my_courses, :not_approved, on: :collection
+    member do
+      patch :approve
+      patch :revoke
+    end
     resources :lessons
     resources :admissions, only: [:new, :create]
   end

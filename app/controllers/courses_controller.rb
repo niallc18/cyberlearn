@@ -1,8 +1,10 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, :only => [:show]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :approve, :revoke]
+  
   def index
     @ransack_path = courses_path
-    @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
+    @ransack_courses = Course.approval.ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
   end
   
@@ -20,11 +22,31 @@ class CoursesController < ApplicationController
     render 'index'
   end
   
+  def not_approved
+    @ransack_path = not_approved_courses_path
+    @ransack_courses = Course.not_approved.ransack(params[:courses_search], search_key: :courses_search)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    render 'index'
+  end
+
+  def approve
+    authorize @course, :approve?
+    @course.update_attribute(:approval, true)
+    redirect_to @course, notice: "Course now approved"
+  end
+
+  def revoke
+    authorize @course, :approve?
+    @course.update_attribute(:approval, false)
+    redirect_to @course, notice: "Course has been revoked"
+  end
 
   def show
+    authorize @course
     @lessons = @course.lessons
     @admissions_review = @course.admission.has_review
   end
+  
   def new
     @course = Course.new
     authorize @course
@@ -71,6 +93,7 @@ class CoursesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
   private
     def set_course
       @course = Course.friendly.find(params[:id])

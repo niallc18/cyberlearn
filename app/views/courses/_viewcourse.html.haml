@@ -33,10 +33,23 @@
     Course Created by:
     = link_to course.user.username, user_path(course.user)
   - if current_user
-    - if policy(course).edit?
+    - if policy(course).creator?
       .card-footer
-        - if policy(course).creator?
-          = link_to 'Add lesson', new_course_lesson_path(course, @lesson), class: 'btn btn-primary btn-sm'
+        = link_to 'Add lesson', new_course_lesson_path(course, @lesson), class: 'btn btn-primary btn-sm'
         = link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning'
-        = link_to 'Destroy', course, method: :delete, data: { confirm: 'Confirm?' }, class: 'btn btn-sm btn-danger'
+        - if policy(course).approve? 
+          = link_to 'Destroy', course, method: :delete, data: { confirm: 'Confirm?' }, class: 'btn btn-sm btn-danger'
+    - if policy(course).destroy?
+      .card-footer
+        - if course.approval?
+          .badge.badge-success approved
+        - else
+          .badge.badge-danger approval requied
+    - if policy(course).approve?
+      .card-footer
+        - if course.approval?
+          = link_to 'revoke', revoke_course_path(course), method: :patch, class: 'btn btn-sm btn-danger'
+        - else
+          = link_to 'approve', approve_course_path(course), method: :patch, class: 'btn btn-sm btn-success'
+      
     %p

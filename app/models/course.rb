@@ -11,6 +11,8 @@ class Course < ApplicationRecord
 
   scope :trending_courses, -> { limit(4).order(rating_avg: :desc, created_at: :desc) }
   scope :new_courses, -> { limit(4).order(created_at: :desc) }
+  scope :approval, -> { where(approval: true) }
+  scope :not_approved, -> { where(approval: false) }
   
   
   def to_s

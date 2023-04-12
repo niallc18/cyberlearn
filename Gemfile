@@ -29,6 +29,7 @@ gem "friendly_id", "~> 5.2.4"
 gem "ransack"
 gem "pundit"
 gem "rolify"
+gem 'ranked-model'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

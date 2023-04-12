@@ -1,6 +1,19 @@
-%li.list-group-item
-  - if lesson.seen(current_user) == true
-    .text-success.far.fa-check-circle
+- if current_user    
+  - if lesson.course.admitted(current_user) || @course.user == current_user
+    - if lesson.seen(current_user) == true
+      .text-success.far.fa-check-circle
+    - else
+      .text-danger.far.fa-times-circle
   - else
-    .text-danger.far.fa-times-circle
-  = link_to lesson.title, course_lesson_path(@course, lesson)
+  = link_to course_lesson_path(@course, lesson), class: "no-hyper" do 
+    = lesson.set_position
+    = lesson.title
+- else
+  = link_to course_lesson_path(@course, lesson), class: "no-hyper" do 
+    = lesson.set_position
+    = lesson.title
+    
+  .card-footer
+    - if policy(lesson).edit?
+      = link_to 'Edit', edit_course_lesson_path(@course, lesson), class: 'btn btn-sm btn-warning'
+      = link_to 'Destroy', [@course, lesson], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'

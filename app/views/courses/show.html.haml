@@ -1,6 +1,7 @@
-= link_to 'Courses', courses_path
+%p
+= link_to 'Courses', courses_path, class: "no-hyper"
 \/
-= link_to @course.title, course_path(@course)
+= link_to @course.title, course_path(@course), class: "no-hyper"
 %p
 .row
   .col-lg-7
@@ -15,7 +16,8 @@
       = @course.lessons.count
     %ul.list-group
       - @lessons.each do |lesson|
-        = render 'lessons/inspect_lesson', lesson: lesson
+        %li.list-group-item
+          = render 'lessons/inspect_lesson', lesson: lesson
 
     %br
 
@@ -24,20 +26,21 @@
       = @admissions_review.count
 
     - @admissions_review.each do |admission|
+      %p
       = render 'admissions/admission', admission: admission
       
     %p
-    %h4
-      .float-right
-        My Progress:
-        = number_to_percentage(@course.progression(current_user), precision: 0)
     
   .col-lg-5
     //- if policy(@course).edit?
     //= link_to 'Add lesson', new_course_lesson_path(@course, @lesson), class: 'btn btn-primary btn-sm btn-block'
+    %h4
+      .float-right
+        My Progress:
+        = number_to_percentage(@course.progression(current_user), precision: 0)
     %p
     .sticky-top
       = render 'courses/viewcourse', course: @course
-    %p
+    
 
 

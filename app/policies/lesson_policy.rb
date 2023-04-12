@@ -10,7 +10,7 @@ class LessonPolicy < ApplicationPolicy
   end
 
   def edit?
-    @record.course.user_id && @user.present? == @user.id
+    @record.course.user_id && @user.present? == @user.id || @user.has_role?(:admin) 
   end
 
   def update?

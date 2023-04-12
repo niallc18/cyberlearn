@@ -8,7 +8,7 @@
     - else
       .text-danger.far.fa-times-circle
       /not seen
-    = link_to lesson.title, course_lesson_path(@course, lesson)
+    = link_to lesson.title, course_lesson_path(@course, lesson), class: "no-hyper"
   - if policy(lesson).show?
     .card-body
       = lesson.info

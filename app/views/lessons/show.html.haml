@@ -1,4 +1,5 @@
 //todo: edit css and change breadcrumbs
+%p
 = link_to 'Courses', courses_path, class: "no-hyper"
 \/
 = link_to @lesson.course.title, course_path(@lesson.course), class: "no-hyper"
@@ -6,9 +7,28 @@
 = link_to @lesson.title, course_lesson_path(@course, @lesson), class: "no-hyper"
 
 %p
+.row
+  .col-lg-9
+    = render 'lessons/lesson', lesson: @lesson
+    %p
+  .col-lg-3
+    %ul.list-group
+      %li.list-group-item
+        = link_to course_path(@lesson.course), class: "no-hyper" do
+          .fa.fa-book
+          = @lesson.course.title
+        .row
+        My Progress:
+        = number_to_percentage(@course.progression(current_user), precision: 0)
 
-= render 'lessons/lesson', lesson: @lesson
+      - @lessons.each do |lesson|
+        - if lesson == @lesson && @lesson.present?  
+          %li.list-group-item.list-group-item-info
+            = render 'lessons/inspect_lesson', lesson: lesson
+        - else
+          %li.list-group-item
+            = render 'lessons/inspect_lesson', lesson: lesson
 
 
-\|
-= link_to 'Back', course_path(@lesson.course), class: "no-hyper"
+// \|
+// = link_to 'Back', course_path(@lesson.course), class: "no-hyper"

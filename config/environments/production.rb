@@ -16,13 +16,13 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
   
-# Rails.application.config.middleware.use ExceptionNotification::Rack,
-#     email: {
-#       deliver_with: :deliver, # Rails >= 4.2.1 do not need this option since it defaults to :deliver_now
-#       email_prefix: "[PREFIX] ",
-#       sender_address: %("CyberLearn Error" <cyber.learn.fyp@gmail.com>),
-#       exception_recipients: %w[niallcanning18@gmail.com]
-#     }
+Rails.application.config.middleware.use ExceptionNotification::Rack,
+    email: {
+      deliver_with: :deliver, # Rails >= 4.2.1 do not need this option since it defaults to :deliver_now
+      email_prefix: "[PREFIX] ",
+      sender_address: %("CyberLearn Error" <cyber.learn.fyp@gmail.com>),
+      exception_recipients: %w[niallcanning18@gmail.com]
+    }
   # Code is not reloaded between requests.
   config.cache_classes = true
 

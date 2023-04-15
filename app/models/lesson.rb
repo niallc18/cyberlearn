@@ -1,7 +1,8 @@
 class Lesson < ApplicationRecord
   belongs_to :course
   has_many :user_progressions, dependent: :destroy
-  validates :title, :info, :course, presence: true
+  validates :info, :course, presence: true
+  validates :title, presence: true, length: {:maximum => 50}
   
   include RankedModel
   ranks :row_order, :with_same => :course_id, default_position: 1

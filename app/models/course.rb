@@ -1,8 +1,8 @@
 class Course < ApplicationRecord
   #course title can't be null and must be unique
-  validates :title, presence: true
-  validates :title, uniqueness: true 
-  validates :description, presence: true, length: {:minimum => 5}
+  validates :title, uniqueness: true, presence: true, length: {:maximum => 50}
+  validates :details, presence: true 
+  validates :description, presence: true, length: {:minimum => 5, :maximum => 300}
   
   belongs_to :user
   has_many :admission, dependent: :destroy

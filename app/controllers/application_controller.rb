@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   def set_global_variables
     @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search) #navbar search
   end
-
+  
   private
 
   def user_not_authorized #pundit

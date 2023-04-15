@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  resources :video, only: [:show, :update]
   resources :admissions do
     get :admitted_students, on: :collection
   end

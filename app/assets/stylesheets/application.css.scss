@@ -30,3 +30,29 @@
 .lesson-row .col-right {
   float: right !important;
 }
+
+.main {
+  display: flex !important;
+  display: inline-block !important;
+  flex: 1 !important;
+  height: 600px;
+}
+
+.card-container {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 400px;
+  overflow: hidden;
+
+}
+
+.card-body {
+  flex: 1 !important;
+  height: 200px;
+}
+
+.card-footer {
+  flex: 1;
+}
+
+

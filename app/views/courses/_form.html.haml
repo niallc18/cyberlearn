@@ -6,6 +6,17 @@
 
     .form-inputs
       = f.input :title
+      = f.label :logo
+      .row
+      - if @course.logo.attached?
+        = image_tag @course.logo, width: "200px"
+        = @course.logo.filename
+        
+      .row
+      = f.file_field :logo 
+      %small= f.error :logo, class: 'text-danger'
+
+      .row
       = f.label :description
       = f.rich_text_area :description
       /= f.input :details, collection: ['Free']

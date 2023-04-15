@@ -99,6 +99,6 @@ class CoursesController < ApplicationController
       @course = Course.friendly.find(params[:id])
     end
     def course_params
-      params.require(:course).permit(:title, :description, :details, :stage)
+      params.require(:course).permit(:title, :description, :details, :stage, :logo)
     end
 end

@@ -16,22 +16,24 @@
             
     %p
 
-.container{style: "padding: 20px; border: 1px solid #01B7EA; font-size: 16px; color: #01B7EA; margin: 0 auto; "}
+.card-group{style: "padding: 20px; border: 1px solid #01B7EA; font-size: 16px; color: #01B7EA; margin: 0 auto; "}
   %hr.text-info
   %h2.text-info
     .fa.fa-arrow-trend-up
     Trending courses
     %p
-  .card-columns{style: "display: inline-block; flex-wrap: wrap; justify-content: space-between; width: 100%; overflow: auto; margin: 0 auto;" }
+  .card-columns{style: "display: inline-block; justify-content: space-between; width: 100%; overflow: auto; margin-right: 10px;" }
     - @trending_courses.each do |course|
       = render 'courses/viewcourse', course: course
-  
+
+%p  
+.card-group{style: "padding: 20px; border: 1px solid #01B7EA; font-size: 16px; color: #01B7EA; margin: 0 auto; "}
   %hr.text-info
   %h2.text-info
     .fa.fa-cart-plus
     New courses
     %p
-  .card-columns{style: "display: inline-block; flex-wrap: wrap; justify-content: space-between; width: 100%; overflow: auto; margin: 0 auto;" }
+  .card-group{style: "display: inline-block; flex-wrap: wrap; justify-content: space-between; width: 100%; overflow: auto; margin: 0 auto;" }
     - @new_courses.each do |course|
       = render 'courses/viewcourse', course: course
   

@@ -8,12 +8,16 @@ class Course < ApplicationRecord
   has_many :admission, dependent: :destroy
   has_many :lessons, dependent: :destroy
   has_many :user_progressions, through: :lessons
+  
+  has_one_attached :logo
+  validates :logo, attached: true, 
+    content_type: ['image/png', 'image/jpg', 'image/jpeg'], 
+    size: { less_than: 750.kilobytes , message: 'Logo size must be under 750 kilobytes' }  
 
   scope :trending_courses, -> { limit(4).order(rating_avg: :desc, created_at: :desc) }
   scope :new_courses, -> { limit(4).order(created_at: :desc) }
   scope :approval, -> { where(approval: true) }
   scope :not_approved, -> { where(approval: false) }
-  
   
   def to_s
     title

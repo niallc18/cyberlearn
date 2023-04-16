@@ -80,7 +80,7 @@
                     = Admission.count
         %ul.navbar-nav.mr-right
           %li.nav-item{class: "#{'active font-weight-bold' if current_page?(root_path)}"}
-            = link_to root_path, class: 'nav-link' do
+            = link_to posts_path, class: 'nav-link' do
               .fa-solid.fa-people-roof
               Forum
           %li.nav-item.dropdown

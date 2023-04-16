@@ -1,0 +1,13 @@
+.container
+  .card-post.h-100.d-flex
+    .row.no-gutters
+    .card-header
+      = posts.title
+    .card-body-custom.h-100.bg-light  
+      .card-text.mt-2.px-2
+        = truncate(posts.description.body.to_plain_text, length: 75, separator: '')
+        %a{ href: post_path(posts), class: "no-hyper" } Show Post
+    .card-footer
+      Created by:
+      = link_to posts.user, user_path(posts.user), class: "no-hyper"
+      = link_to 'Edit', edit_post_path(posts), class: 'btn btn-sm btn-warning'

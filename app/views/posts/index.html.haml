@@ -1,0 +1,38 @@
+%p
+%h1  
+  Posts:
+  = @posts.count
+%p
+
+= link_to 'Add Post', new_post_path(@posts), class: 'btn btn-primary btn-sm'
+
+%p
+
+.row  
+  .col-md-10
+    .main
+      - @posts.each do |posts|
+        %p
+        = render 'posts/viewpost', posts: posts
+
+// %table
+//   %thead
+//     %tr
+//       %th Title
+//       %th Description
+//       %th
+//       %th
+//       %th
+
+//   %tbody
+//     - @posts.each do |post|
+//       %tr
+//         %td= post.title
+//         %td= post.description
+//         %td= link_to 'Show', post
+//         %td= link_to 'Edit', edit_post_path(post)
+//         %td= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }
+
+// %br
+
+// = link_to 'New Post', new_post_path

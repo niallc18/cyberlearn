@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :courses
   has_many :admission
   has_many :user_progressions
+  has_many :posts
   
   def to_s
   email  

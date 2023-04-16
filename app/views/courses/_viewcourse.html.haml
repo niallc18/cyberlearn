@@ -1,5 +1,5 @@
-.main
-  .card-container.text-info.bg-dark.mb-3
+.main.border
+  .card-container.text-dark.bg-muted.mb-3
     .row.no-gutters
     .card-header
       .fa.fa-book
@@ -7,7 +7,7 @@
     - if course.logo.attached?
       .card-img-top
         = image_tag course.logo, height: "200px", width: "400px"
-    .card-body
+    .card-body.bg-light
       = course.description
     .card-footer
       .fa.fa-book

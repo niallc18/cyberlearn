@@ -1,27 +1,25 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
-  # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @ransack_path = posts_path
+    @ransack_posts = Post.ransack(params[:posts_search], search_key: :posts_search)
+    @pagy, @posts = pagy(@ransack_posts.result.includes(:user))
+    
   end
 
-  # GET /posts/1 or /posts/1.json
   def show
   end
 
-  # GET /posts/new
   def new
     @post = Post.new
     authorize @post
   end
 
-  # GET /posts/1/edit
   def edit
     authorize @post
   end
 
-  # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
     @post.user = current_user
@@ -38,7 +36,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /posts/1 or /posts/1.json
   def update
     authorize @post
     respond_to do |format|
@@ -52,7 +49,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE /posts/1 or /posts/1.json
   def destroy
     authorize @post
     @post.destroy
@@ -64,12 +60,10 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+      @post = Post.friendly.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:title, :description)
     end

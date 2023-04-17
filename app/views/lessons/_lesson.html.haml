@@ -12,7 +12,6 @@
   - if policy(lesson).show?
     .card-body
       = lesson.info
-      /= lesson.course
   - if policy(lesson).edit?
     .card-footer
       = link_to 'Edit', edit_course_lesson_path(@course, lesson), class: 'btn btn-sm btn-warning'

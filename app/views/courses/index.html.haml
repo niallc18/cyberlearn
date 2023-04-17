@@ -1,32 +1,25 @@
+%p
 %h1  
   Courses:
   = @courses.count
   
 %p
-%br
 .row
+  .col-md-10
+    .main
+      - @courses.each do |course|
+        = render 'courses/viewcourse', course: course
   .col-md-2
-    = search_form_for @ransack_courses, as: :courses_search, url: @ransack_pathh do |f|
-      = f.label :title
-      = f.search_field :title_cont, placeholder: 'Title', class: 'form-control form-control-sm'
+    = search_form_for @ransack_courses, as: :courses_search, url: @ransack_path do |f|
+      = f.label :Course
+      = f.search_field :title_cont, placeholder: 'Course', class: 'form-control form-control-sm'
       = f.label :description
       = f.search_field :description_cont, placeholder: 'Description', class: 'form-control form-control-sm'
-      /= f.search_field :language_cont, placeholder: 'Language', class: 'form-control form-control-sm'
-      /= f.select :language_cont, ['English', 'Polish', 'Russian'], include_blank: true, class: 'form-control form-control-sm'
       = f.label :details
       = f.select :details_cont, Course.details, include_blank: true
       %br
       = f.label :stage
       = f.select :stage_cont, Course.stage, include_blank: true
-      = f.search_field :user_email_cont, placeholder: 'Email', class: 'form-control form-control-sm'
       = f.submit
-    = link_to 'refresh', @ransack_path
-
-
-  .col-md-10
-    .main
-      - @courses.each do |course|
-        = render 'courses/viewcourse', course: course
-    
-  != pagy_bootstrap_nav(@pagy)
-= link_to "Home", root_path, class: "no-hyper"
+    = link_to 'Clear', @ransack_path
+!= pagy_bootstrap_nav(@pagy)

@@ -14,6 +14,7 @@
       - @posts.each do |posts|
         %p
         = render 'posts/viewpost', posts: posts
+    %p    
     != pagy_bootstrap_nav(@pagy)
   .col-md-2
     = search_form_for @ransack_posts, as: :posts_search, url: @ransack_path do |f|

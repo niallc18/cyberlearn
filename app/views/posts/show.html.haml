@@ -17,3 +17,13 @@
         = link_to 'Edit', edit_post_path(@post), class: 'btn btn-sm btn-warning'
         = link_to 'Delete', [@post], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
 
+%p        
+.fa.fa-message
+Replies:
+= @messages.count
+- @messages.each do |message|
+  %p
+  = render 'posts/messages/message', message: message
+%hr
+= render 'posts/messages/form'
+

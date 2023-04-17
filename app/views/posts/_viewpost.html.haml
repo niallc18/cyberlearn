@@ -4,12 +4,16 @@
     .card-header
       = posts.title
     .card-body-custom.h-100.bg-light  
-      .card-text.mt-2.px-2
+      .card-info.mt-2.px-2
         = truncate(posts.description.body.to_plain_text, length: 75, separator: '')
         %a{ href: post_path(posts), class: "no-hyper" } Continue reading
     .card-footer
       Created by:
       = link_to posts.user, user_path(posts.user), class: "no-hyper"
+      %br
+      .fa.fa-message
+      Replies:
+      = posts.messages.count
     
     - if policy(posts).edit?    
       .card-footer

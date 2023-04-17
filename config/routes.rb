@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :posts
+  resources :posts do
+    resources :messages, except: [:index]
+  end
   devise_for :users
   resources :video, only: [:show, :update]
   resources :admissions do

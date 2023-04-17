@@ -1,5 +1,7 @@
 class Post < ApplicationRecord
+  
   belongs_to :user
+  has_many :messages
   
   extend FriendlyId
   friendly_id :to_s, use: :slugged
@@ -8,6 +10,10 @@ class Post < ApplicationRecord
   
   def to_s
     title
+  end
+  
+  def username
+    self.email.split(/@/).first
   end
   
 end

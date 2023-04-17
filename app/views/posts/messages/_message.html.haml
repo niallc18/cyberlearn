@@ -1,0 +1,6 @@
+.card
+  .card-body
+    = message.content
+  .card-footer
+    .fa.fa-circle-user
+    = link_to message.user.username, user_path(message.user), class: "no-hyper"

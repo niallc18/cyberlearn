@@ -9,7 +9,7 @@ module CoursesHelper
           number_to_percentage(course.progression(current_user), precision: 0) #progession for lessons as percentage
         end
       else
-        link_to "Free", new_course_admission_path(course), class: 'btn btn-success'
+        link_to "Free", new_course_admission_path(course), class: 'btn btn-success btn-sm'
       end
     else
       link_to "Details", new_course_admission_path(course), class: "btn btn-md btn-success"

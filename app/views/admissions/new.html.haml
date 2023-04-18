@@ -1,10 +1,9 @@
+%p
 .card
   .card-header
-    %h1
-      .fa.fa-check
-      = link_to @course.title, course_path(@course)
-      %hr
-      Register now!
+    = link_to @course.title, course_path(@course)
+    %hr
+    Register now!
   .card-body
     = form_tag course_admissions_path(@course) do
       = submit_tag "#{@course.details}", class: 'btn btn-lg btn-success'

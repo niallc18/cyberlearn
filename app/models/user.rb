@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable, :confirmable
   rolify       
-  
+  attr_accessor :login
   has_many :courses
   has_many :admission
   has_many :user_progressions
@@ -14,11 +14,7 @@ class User < ApplicationRecord
   def to_s
   email  
   end
-  
-  def username
-    self.email.split(/@/).first
-  end
-  
+
   extend FriendlyId
   friendly_id :email, use: :slugged
 
@@ -48,6 +44,15 @@ class User < ApplicationRecord
     unless self.user_progressions.where(lesson: lesson).any?
       self.user_progressions.create(lesson: lesson)
     end
+  end
+  
+  #https://web-crunch.com/posts/devise-login-with-username-email fix for login bug with user/email
+  def self.find_for_database_authentication warden_condition
+    conditions = warden_condition.dup
+    login = conditions.delete(:login)
+    where(conditions).where(
+      ["lower(username) = :value OR lower(email) = :value",
+      { value: login.strip.downcase}]).first
   end
 
   private

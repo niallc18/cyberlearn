@@ -41,7 +41,7 @@
           = link_to 'Add lesson', new_course_lesson_path(course, @lesson), class: 'btn btn-primary btn-sm'
           = link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning'
           - if policy(course).approve? 
-            = link_to 'Destroy', course, method: :delete, data: { confirm: 'Confirm?' }, class: 'btn btn-sm btn-danger'
+            = link_to 'Delete', course, method: :delete, data: { confirm: 'Confirm?' }, class: 'btn btn-sm btn-danger'
       - if policy(course).destroy?
         .card-footer
           - if course.approval?

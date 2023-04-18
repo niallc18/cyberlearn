@@ -4,3 +4,5 @@
   .card-footer
     .fa.fa-circle-user
     = link_to message.user.username, user_path(message.user), class: "no-hyper"
+    = message.created_at.strftime("%d/%m/%Y") 
+    = link_to 'Delete', [@post, message], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' 

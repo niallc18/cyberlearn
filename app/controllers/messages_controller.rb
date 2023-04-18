@@ -17,6 +17,17 @@ class MessagesController < ApplicationController
     end
 
   end
+  
+  def destroy
+    @post = Post.friendly.find(params[:post_id])
+    @message = Message.find(params[:id])
+    @message.destroy
+    respond_to do |format|
+      format.html { redirect_to post_url(@post), notice: 'Message Deleted' }
+      format.json { head :no_content }
+    end
+  end
+
 
   private
     def message_params

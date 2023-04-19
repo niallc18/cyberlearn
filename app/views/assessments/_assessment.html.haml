@@ -7,7 +7,33 @@
       = link_to 'Delete', [@course, assessment], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' 
   - if policy(assessment).show?  
     .card-body
-      .card-text
-        = assessment.questions
+      = assessment.questions
+
+%p
+ 
+- if (@course.progression(current_user)).to_i == 100 
+  %button#answers-toggle Show Answers
+  %p
+  #answers{ style: 'display: none;' }
+    .card
+      .card-body
+        %p.card-text= @assessment.answers.body.to_plain_text
+  
+  :javascript
+    const button = document.querySelector('#answers-toggle');
+    const answers = document.querySelector('#answers');
+    button.addEventListener('click', () => {
+      if (answers.style.display === 'none') {
+        answers.style.display = 'block';
+        button.innerText = 'Hide Answers';
+      } else {
+        answers.style.display = 'none';
+        button.innerText = 'Show Answers';
+      }
+    });
+- else
+  .alert.alert-danger.alert-dismissible.fade.show{ role: 'alert' }
+    .alert-heading= "You have not completed all lessons! Once all lessons are completed, the answers can be revealed."
+        
 
    

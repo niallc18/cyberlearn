@@ -44,6 +44,7 @@ class CoursesController < ApplicationController
   def show
     authorize @course
     @lessons = @course.lessons.rank(:row_order).all
+    @assessments = @course.assessments
     @admissions_review = @course.admission.has_review
   end
   

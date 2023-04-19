@@ -1,0 +1,9 @@
+- if current_user  
+  - if assessment.course.admitted(current_user) || @course.user == current_user
+    .text-success.far.fa-check-circle
+  - else
+  = link_to course_assessment_path(@course, assessment), class: "no-hyper" do 
+    = assessment.title
+- else
+  = link_to course_assessment_path(@course, assessment), class: "no-hyper" do 
+    = assessment.title

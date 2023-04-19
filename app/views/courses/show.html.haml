@@ -20,6 +20,16 @@
           = render 'lessons/inspect_lesson', lesson: lesson
 
     %br
+    
+    %h4
+      Assessments:
+      = @course.assessments.count
+    %ul.list-group
+      - @assessments.each do |assessment|
+        %li.list-group-item
+          = render 'assessments/inspect_assessment', assessment: assessment
+
+    %br
 
     %h4
       Course Reviews:

@@ -1,7 +1,9 @@
-%h1 Editing assessment
-
-= render 'form'
-
-= link_to 'Show', @assessment
-\|
-= link_to 'Back', assessments_path
+.card
+  .card-header
+    %h1 Editing assessment
+  .card-body
+    = render 'form'
+  .card-footer
+    = link_to 'Show assessment', course_assessment_path(@course, @assessment)
+    \|
+    = link_to 'Back to course', course_path(@assessment.course)

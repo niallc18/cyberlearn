@@ -1,25 +1,26 @@
-%h1 Listing assessments
+// %h1 Listing assessments
 
-%table
-  %thead
-    %tr
-      %th Question
-      %th Answer
-      %th Course
-      %th
-      %th
-      %th
+// %table
+//   %thead
+//     %tr
+//       %th Title
+//       %th Answer
+//       %th Course
+//       %th Question
+//       %th
+//       %th
 
-  %tbody
-    - @assessments.each do |assessment|
-      %tr
-        %td= assessment.question
-        %td= assessment.answer
-        %td= assessment.course
-        %td= link_to 'Show', assessment
-        %td= link_to 'Edit', edit_assessment_path(assessment)
-        %td= link_to 'Destroy', assessment, method: :delete, data: { confirm: 'Are you sure?' }
+//   %tbody
+//     - @assessments.each do |assessment|
+//       %tr
+//         %td= assessment.title
+//         %td= assessment.question
+//         %td= assessment.answer
+//         %td= assessment.course
+//         %td= link_to 'Show', assessment
+//         %td= link_to 'Edit', edit_assessment_path(assessment)
+//         %td= link_to 'Destroy', assessment, method: :delete, data: { confirm: 'Are you sure?' }
 
-%br
+// %br
 
-= link_to 'New Assessment', new_assessment_path
+// = link_to 'New Assessment', new_assessment_path

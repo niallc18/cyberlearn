@@ -1,15 +1,27 @@
-%p#notice= notice
+%p
+= link_to 'Courses', courses_path, class: "no-hyper"
+\/
+= link_to @assessment.course.title, course_path(@assessment.course), class: "no-hyper"
+\/
+= link_to @assessment.title, course_assessment_path(@course, @assessment), class: "no-hyper"
 
 %p
-  %b Question:
-  = @assessment.question
-%p
-  %b Answer:
-  = @assessment.answer
-%p
-  %b Course:
-  = @assessment.course
-
-= link_to 'Edit', edit_assessment_path(@assessment)
-\|
-= link_to 'Back', assessments_path
+.row
+  .col-lg-9
+    = render 'assessments/assessment', assessment: @assessment
+    %p
+  .col-lg-3
+    %ul.list-group
+      %li.list-group-item
+        = link_to course_path(@assessment.course), class: "no-hyper" do
+          .fa.fa-book
+          = @assessment.course.title
+          
+          
+      - @assessments.each do |assessment|
+        - if assessment == @assessment && @assessment.present?  
+          %li.list-group-item.list-group-item-info
+            = render 'assessments/inspect_assessment', assessment: assessment
+        - else
+          %li.list-group-item
+            = render 'assessments/inspect_assessment', assessment: assessment

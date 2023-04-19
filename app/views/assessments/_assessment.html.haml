@@ -1,0 +1,6 @@
+%p
+.card
+  .card-header
+    = link_to assessment.title, course_assessment_path(@course, assessment), class: "no-hyper"
+  .card-body
+    = assessment.question

@@ -69,6 +69,6 @@ class AssessmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def assessment_params
-      params.require(:assessment).permit(:question, :answer)
+      params.require(:assessment).permit(:title, :question, :answer)
     end
 end

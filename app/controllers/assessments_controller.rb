@@ -8,6 +8,7 @@ class AssessmentsController < ApplicationController
 
   # GET /assessments/1 or /assessments/1.json
   def show
+    authorize @assessment
     @assessments = @course.assessments
   end
 
@@ -26,6 +27,7 @@ class AssessmentsController < ApplicationController
     @assessment = Assessment.new(assessment_params)
     @course = Course.friendly.find(params[:course_id])
     @assessment.course_id = @course.id
+    authorize @assessment
     respond_to do |format|
       if @assessment.save
         format.html { redirect_to course_assessment_path(@course, @assessment), notice: "Assessment was successfully created." }

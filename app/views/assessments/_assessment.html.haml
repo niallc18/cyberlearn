@@ -2,5 +2,11 @@
 .card
   .card-header
     = link_to assessment.title, course_assessment_path(@course, assessment), class: "no-hyper"
-  .card-body
-    = assessment.question
+  - if policy(assessment).show?  
+    .card-body
+      = assessment.question
+      = assessment.answer
+  - if policy(assessment).edit?
+    .card-footer
+      = link_to 'Edit', edit_course_assessment_path(@course, assessment), class: 'btn btn-sm btn-warning'
+      = link_to 'Delete', [@course, assessment], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'    

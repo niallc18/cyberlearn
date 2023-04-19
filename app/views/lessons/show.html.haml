@@ -19,7 +19,9 @@
           = @lesson.course.title
         .row
         My Progress:
-        = number_to_percentage(@course.progression(current_user), precision: 0)
+        .progress
+          .progress-bar{role: 'progressbar', style: "width: #{number_to_percentage(@course.progression(current_user), precision: 0)};"}
+            = number_to_percentage(@course.progression(current_user), precision: 0)
 
       - @lessons.each do |lesson|
         - if lesson == @lesson && @lesson.present?  

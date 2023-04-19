@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   
   belongs_to :user
-  has_many :messages
+  has_many :messages, dependent: :destroy
   
   extend FriendlyId
   friendly_id :to_s, use: :slugged

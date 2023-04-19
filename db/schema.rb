@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_18_211226) do
+ActiveRecord::Schema.define(version: 2023_04_18_225044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,15 @@ ActiveRecord::Schema.define(version: 2023_04_18_211226) do
     t.index ["course_id"], name: "index_admissions_on_course_id"
     t.index ["slug"], name: "index_admissions_on_slug", unique: true
     t.index ["user_id"], name: "index_admissions_on_user_id"
+  end
+
+  create_table "assessments", force: :cascade do |t|
+    t.string "question"
+    t.text "answer"
+    t.bigint "course_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_assessments_on_course_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -183,6 +192,7 @@ ActiveRecord::Schema.define(version: 2023_04_18_211226) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "admissions", "courses"
   add_foreign_key "admissions", "users"
+  add_foreign_key "assessments", "courses"
   add_foreign_key "courses", "users"
   add_foreign_key "lessons", "courses"
   add_foreign_key "messages", "posts"

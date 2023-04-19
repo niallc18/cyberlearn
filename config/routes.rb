@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       patch :revoke
     end
     resources :lessons
+    resources :assessments
     resources :admissions, only: [:new, :create]
   end
   resources :users, only: [:index, :edit, :show, :update]

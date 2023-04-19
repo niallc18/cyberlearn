@@ -1,0 +1,13 @@
+// %h1 New assessment
+
+// = render 'form'
+
+// = link_to 'Back', course_path(@course)
+%p
+.card
+  .card-header
+    %h1 Create assessment
+  .card-body
+    = render 'form'
+  .card-footer
+    = link_to 'Back to course', course_path(@course)

@@ -5,9 +5,10 @@
 
   .form-inputs
     = f.input :title
-    = f.input :question
-    = f.label :answer
-    = f.rich_text_area :answer
+    = f.label :questions
+    = f.rich_text_area :questions
+    = f.label :answers
+    = f.rich_text_area :answers
   %p
   .form-actions
     = f.button :submit

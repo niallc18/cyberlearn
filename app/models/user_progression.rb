@@ -2,6 +2,7 @@ class UserProgression < ApplicationRecord
   
   belongs_to :user
   belongs_to :lesson
+
   
   validates :user, :lesson, presence: true
 

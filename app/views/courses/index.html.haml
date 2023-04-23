@@ -1,6 +1,6 @@
 %p
 %h1  
-  Courses:
+  Total Courses:
   = @courses.count
   
 %p
@@ -16,10 +16,14 @@
       = f.label :description
       = f.search_field :description_cont, placeholder: 'Description', class: 'form-control form-control-sm'
       = f.label :details
-      = f.select :details_cont, Course.details, include_blank: true
+      %br
+      = f.select :details_cont, Course.details
       %br
       = f.label :stage
-      = f.select :stage_cont, Course.stage, include_blank: true
+      %br
+      = f.select :stage_cont, Course.stage
       = f.submit
     = link_to 'Clear', @ransack_path
 != pagy_bootstrap_nav(@pagy)
+
+

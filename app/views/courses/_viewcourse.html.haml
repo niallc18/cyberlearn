@@ -38,22 +38,20 @@
     - if current_user
       - if policy(course).creator?
         .card-footer
-          = link_to 'Add lesson', new_course_lesson_path(course, @lesson), class: 'btn btn-primary btn-sm'
-          = link_to 'Add assess', new_course_assessment_path(course, @assessment), class: 'btn btn-primary btn-sm'
-          = link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning'
-          - if policy(course).approve? 
-            = link_to 'Delete', course, method: :delete, data: { confirm: 'Confirm?' }, class: 'btn btn-sm btn-danger'
-      - if policy(course).destroy?
-        .card-footer
-          - if course.approval?
-            .badge.badge-success Approved
-          - else
-            .badge.badge-danger Approval requied
+          %div.dropdown
+            %button.btn.btn-warning.dropdown-toggle{"type" => "button", "id" => "dropdownMenuButton", "data-bs-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false"}
+              Tools
+            %div.dropdown-menu{"aria-labelledby" => "dropdownMenuButton"}
+              = link_to 'Add lesson', new_course_lesson_path(course, @lesson), class: "dropdown-item"
+              = link_to 'Add assessment', new_course_assessment_path(course, @assessment), class: "dropdown-item"
+              = link_to 'Edit course', edit_course_path(course), class: "dropdown-item"
+              - if policy(course).approve? 
+                = link_to 'Delete course', course, method: :delete, data: { confirm: 'Confirm?' }, class: "dropdown-item"
       - if policy(course).approve?
         .card-footer
           - if course.approval?
-            = link_to 'Revoke', revoke_course_path(course), method: :patch, class: 'btn btn-sm btn-danger'
+            = link_to 'Revoke', revoke_course_path(course), method: :patch, class: "btn btn-sm btn-danger"
           - else
-            = link_to 'Approve', approve_course_path(course), method: :patch, class: 'btn btn-sm btn-success'
+            = link_to 'Approve', approve_course_path(course), method: :patch, class: "btn btn-sm btn-success"
         
       %p

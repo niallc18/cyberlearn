@@ -8,6 +8,13 @@ class CoursesController < ApplicationController
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
   end
   
+  def trending
+    @ransack_path = trending_courses_path
+    @ransack_courses = Course.where(@trending_courses).ransack(params[:courses_search], search_key: :courses_search)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    render 'index'
+  end
+  
   def registered
     @ransack_path = registered_courses_path
     @ransack_courses = Course.joins(:admission).where(admission: {user: current_user}).ransack(params[:courses_search], search_key: :courses_search)

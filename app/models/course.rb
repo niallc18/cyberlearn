@@ -17,6 +17,8 @@ class Course < ApplicationRecord
 
   scope :trending_courses, -> { limit(3).order(rating_avg: :desc, created_at: :desc) }
   scope :new_courses, -> { limit(3).order(created_at: :desc) }
+  scope :advanced_courses, -> { limit(3).where(stage: :"Expert") }
+  scope :beginner_courses, -> { limit(3).where(stage: :"Newbie") }
   scope :approval, -> { where(approval: true) }
   scope :not_approved, -> { where(approval: false) }
   

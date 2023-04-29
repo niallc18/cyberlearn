@@ -13,6 +13,7 @@ class LessonsController < ApplicationController
     authorize @lesson
     current_user.lesson_seen(@lesson)
     @lessons = @course.lessons
+    @assessments = @course.assessments
   end
 
   # GET /lessons/new

@@ -22,7 +22,11 @@
         .progress
           .progress-bar{role: 'progressbar', style: "width: #{number_to_percentage(@course.progression(current_user), precision: 0)};"}
             = number_to_percentage(@course.progression(current_user), precision: 0)
-
+            
+    %p  
+    %ul.list-group
+      %li.list-group-item
+        Lessons:
       - @lessons.each do |lesson|
         - if lesson == @lesson && @lesson.present?  
           %li.list-group-item.list-group-item-info
@@ -30,6 +34,18 @@
         - else
           %li.list-group-item
             = render 'lessons/inspect_lesson', lesson: lesson
-
-
-
+      
+      
+      
+    %p  
+    %ul.list-group
+      %li.list-group-item
+        Assessments:
+      - @assessments.each do |assessment|
+        - if assessment == @assessment && @assessment.present?  
+          %li.list-group-item.list-group-item-info
+            = render 'assessments/inspect_assessment', assessment: assessment
+        - else
+          %li.list-group-item
+            = render 'assessments/inspect_assessment', assessment: assessment
+    

@@ -5,7 +5,7 @@ class Course < ApplicationRecord
   validates :description, presence: true, length: {:minimum => 5, :maximum => 300}
   
   belongs_to :user
-  has_many :admission, dependent: :destroy
+  has_many :admissions, dependent: :destroy
   has_many :lessons, dependent: :destroy
   has_many :assessments, dependent: :destroy
   has_many :user_progressions, through: :lessons
@@ -41,12 +41,12 @@ class Course < ApplicationRecord
   end
   
   def admitted(user)
-    self.admission.where(user_id: [user.id], course_id: [self.id]).any?
+    self.admissions.where(user_id: [user.id], course_id: [self.id]).any?
   end
   
   def update_avg
-    if admission.any? && admission.where.not(rating: nil).any?
-      update_column :rating_avg, (admission.average(:rating).round(2).to_f)
+    if admissions.any? && admissions.where.not(rating: nil).any?
+      update_column :rating_avg, (admissions.average(:rating).round(2).to_f)
     else
       update_column :rating_avg, (0)
     end

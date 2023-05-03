@@ -3,7 +3,7 @@ module CoursesHelper
     if current_user
       if course.user == current_user
         link_to "View details", course_path(course), class: "btn btn-primary btn-sm"
-      elsif course.admission.where(user: current_user).any?
+      elsif course.admissions.where(user: current_user).any?
         link_to course_path(course), class: "btn btn-primary btn-sm" do
           raw("My Progress: ") +
           number_to_percentage(course.progression(current_user), precision: 0) #progession for lessons as percentage
@@ -17,7 +17,7 @@ module CoursesHelper
   end
   
   def review_button(course)
-    user_course = course.admission.where(user: current_user)
+    user_course = course.admissions.where(user: current_user)
     if current_user
       if user_course.any?
         if user_course.review_needed.any?

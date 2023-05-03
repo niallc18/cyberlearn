@@ -17,7 +17,7 @@ class CoursesController < ApplicationController
   
   def registered
     @ransack_path = registered_courses_path
-    @ransack_courses = Course.joins(:admission).where(admission: {user: current_user}).ransack(params[:courses_search], search_key: :courses_search)
+    @ransack_courses = Course.joins(:admissions).where(admissions: {user: current_user}).ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
     render 'index'
   end
@@ -52,7 +52,7 @@ class CoursesController < ApplicationController
     authorize @course
     @lessons = @course.lessons.rank(:row_order).all
     @assessments = @course.assessments
-    @admissions_review = @course.admission.has_review
+    @admissions_review = @course.admissions.has_review
   end
   
   def new

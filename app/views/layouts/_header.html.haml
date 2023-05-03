@@ -44,7 +44,7 @@
                   .fa.fa-graduation-cap
                   My Courses
                   .badge.badge-danger
-                    = current_user.admission.count
+                    = current_user.admissions.count
           - if current_user.has_role?(:teacher)
             %li.nav-item.dropdown
               %a#teacherDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}

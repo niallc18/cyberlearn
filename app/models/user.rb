@@ -6,7 +6,7 @@ class User < ApplicationRecord
   rolify       
   attr_accessor :login
   has_many :courses
-  has_many :admission
+  has_many :admissions
   has_many :user_progressions
   has_many :posts
   has_many :messages
@@ -37,7 +37,7 @@ class User < ApplicationRecord
   end
 
   def admit_course(course)
-    self.admission.create(course: course, price: course.details)
+    self.admissions.create(course: course, price: course.details)
   end
   
   def lesson_seen(lesson)

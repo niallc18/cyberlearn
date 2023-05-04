@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable, :confirmable
   rolify       
@@ -18,9 +16,9 @@ class User < ApplicationRecord
   extend FriendlyId
   friendly_id :email, use: :slugged
 
-  after_create :assign_default_role
+  after_create :default_role
 
-  def assign_default_role
+  def default_role
     if User.count == 1
       self.add_role(:admin) if self.roles.blank? #admin for initial user
       self.add_role(:teacher) 
@@ -29,8 +27,6 @@ class User < ApplicationRecord
       self.add_role(:student) if self.roles.blank?
     end
   end
-  
-  validate :must_have_a_role, on: :update
   
   def online?
     updated_at > 5.minutes.ago
@@ -55,10 +51,12 @@ class User < ApplicationRecord
       { value: login.strip.downcase}]).first
   end
 
+  validate :need_role, on: :update
+
   private
-  def must_have_a_role
+  def need_role
     unless roles.any?
-      errors.add(:roles, "must have at least one role")
+      errors.add(:roles, "You must have at least one role!")
     end
   end
 

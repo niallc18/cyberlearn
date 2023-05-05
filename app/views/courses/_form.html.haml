@@ -19,10 +19,8 @@
       .row
       = f.label :description
       = f.rich_text_area :description
-      /= f.input :details, collection: ['Free']
-      /= f.input :stage, collection: ['Newbie', 'Amateur', 'Expert']
-      = f.input :details, collection: Course.details, include_blank: true
-      = f.input :stage, collection: Course.stage, include_blank: true
+      = f.input :details, collection: Course.details
+      = f.input :stage, collection: Course.stage
 
 
     .form-actions

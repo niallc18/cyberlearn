@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :messages
   
   def to_s
-  email  
+    email  
   end
 
   extend FriendlyId

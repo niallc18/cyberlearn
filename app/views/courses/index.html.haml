@@ -11,11 +11,11 @@
     = f.search_field :description_cont, placeholder: 'Description', class: 'form-control form-control-sm'
     = f.label :details
     %br
-    = f.select :details_cont, Course.details
+    = f.select :details_cont, Course.details, include_blank: "None"
     %br
     = f.label :stage
     %br
-    = f.select :stage_cont, Course.stage
+    = f.select :stage_cont, Course.stage, include_blank: "None"
     %br
     %p
     = f.button "Search", class: 'btn btn-info'

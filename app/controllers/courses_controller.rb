@@ -10,7 +10,7 @@ class CoursesController < ApplicationController
   
   def trending
     @ransack_path = trending_courses_path
-    @ransack_courses = Course.where(@trending_courses).ransack(params[:courses_search], search_key: :courses_search)
+    @ransack_courses = Course.order(rating_avg: :desc, created_at: :desc).ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
     render 'index'
   end

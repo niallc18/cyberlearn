@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     get :admitted_students, on: :collection
   end
   resources :courses do
-    get :registered, :my_courses, :not_approved, on: :collection
+    get :trending, :registered, :my_courses, :not_approved, on: :collection
     member do
       patch :approve
       patch :revoke

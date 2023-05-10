@@ -1,12 +1,13 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :trackable, :confirmable
-  rolify       
-  attr_accessor :login
-  has_many :courses
+         :recoverable, :rememberable, :validatable, :trackable, :confirmable, authentication_keys: [:login]
+  rolify   
+  
+  attr_writer :login
+  has_many :courses, dependent: :destroy
   has_many :admissions
   has_many :user_progressions
-  has_many :posts
+  has_many :posts, dependent: :destroy
   has_many :messages
   
   def to_s
@@ -42,13 +43,17 @@ class User < ApplicationRecord
     end
   end
   
-  #https://web-crunch.com/posts/devise-login-with-username-email fix for login bug with user/email
-  def self.find_for_database_authentication warden_condition
-    conditions = warden_condition.dup
-    login = conditions.delete(:login)
-    where(conditions).where(
-      ["lower(username) = :value OR lower(email) = :value",
-      { value: login.strip.downcase}]).first
+  def login
+    @login || self.username || self.email
+  end
+  
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    if (login = conditions.delete(:login))
+      where(conditions.to_h).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    elsif conditions.has_key?(:username) || conditions.has_key?(:email)
+      where(conditions.to_h).first
+    end
   end
 
   validate :need_role, on: :update

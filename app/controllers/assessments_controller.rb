@@ -1,28 +1,23 @@
 class AssessmentsController < ApplicationController
   before_action :set_assessment, only: %i[ show edit update destroy ]
 
-  # GET /assessments or /assessments.json
   def index
     @assessments = Assessment.all
   end
 
-  # GET /assessments/1 or /assessments/1.json
   def show
     authorize @assessment
     @assessments = @course.assessments
   end
 
-  # GET /assessments/new
   def new
     @assessment = Assessment.new
     @course = Course.friendly.find(params[:course_id])
   end
 
-  # GET /assessments/1/edit
   def edit
   end
 
-  # POST /assessments or /assessments.json
   def create
     @assessment = Assessment.new(assessment_params)
     @course = Course.friendly.find(params[:course_id])
@@ -39,7 +34,6 @@ class AssessmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /assessments/1 or /assessments/1.json
   def update
     respond_to do |format|
       if @assessment.update(assessment_params)
@@ -52,10 +46,9 @@ class AssessmentsController < ApplicationController
     end
   end
 
-  # DELETE /assessments/1 or /assessments/1.json
+
   def destroy
     @assessment.destroy
-
     respond_to do |format|
       format.html { redirect_to course_path(@course), notice: "Assessment was successfully destroyed." }
       format.json { head :no_content }
@@ -63,13 +56,11 @@ class AssessmentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_assessment
       @course = Course.friendly.find(params[:course_id])
       @assessment = Assessment.friendly.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def assessment_params
       params.require(:assessment).permit(:title, :questions, :answers)
     end

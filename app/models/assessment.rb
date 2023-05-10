@@ -1,6 +1,8 @@
 class Assessment < ApplicationRecord
   belongs_to :course
   
+  validates :title, presence: true, length: {:maximum => 50}
+  
   has_rich_text :answers
   has_rich_text :questions
   

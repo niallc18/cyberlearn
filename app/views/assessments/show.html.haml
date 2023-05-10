@@ -1,5 +1,5 @@
 %p
-= link_to 'Courses', courses_path, class: "no-hyper"
+= link_to "Courses", courses_path, class: "no-hyper"
 \/
 = link_to @assessment.course.title, course_path(@assessment.course), class: "no-hyper"
 \/
@@ -8,7 +8,7 @@
 %p
 .row
   .col-lg-9
-    = render 'assessments/assessment', assessment: @assessment
+    = render "assessments/assessment", assessment: @assessment
     %p
   .col-lg-3
     %ul.list-group
@@ -21,7 +21,9 @@
       - @assessments.each do |assessment|
         - if assessment == @assessment && @assessment.present?  
           %li.list-group-item.list-group-item-info
-            = render 'assessments/inspect_assessment', assessment: assessment
+            = render "assessments/inspect_assessment", assessment: assessment
         - else
           %li.list-group-item
-            = render 'assessments/inspect_assessment', assessment: assessment
+            = render "assessments/inspect_assessment", assessment: assessment
+            
+            

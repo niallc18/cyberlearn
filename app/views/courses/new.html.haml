@@ -1,8 +1,9 @@
+%p
 .card
   .card-header
     %h1 New course:
   .card-body
-    = render 'form'
+    = render "form"
 
   .card-footer
-    = link_to 'Back', courses_path, class: "no-hyper"
+    = link_to "Back", courses_path, class: "btn btn-info"

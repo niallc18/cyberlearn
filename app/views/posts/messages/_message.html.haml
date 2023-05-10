@@ -6,4 +6,4 @@
     = link_to message.user.username, user_path(message.user), class: "no-hyper"
     = time_ago_in_words(message.updated_at)
     ago
-    = link_to 'Delete', [@post, message], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' 
+    = link_to "Delete", [@post, message], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" 

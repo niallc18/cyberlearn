@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   
   belongs_to :user
   has_many :messages, dependent: :destroy
+  validates :title, presence: true, length: {:maximum => 50}
   
   extend FriendlyId
   friendly_id :to_s, use: :slugged

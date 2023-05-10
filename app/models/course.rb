@@ -9,9 +9,10 @@ class Course < ApplicationRecord
   has_many :lessons, dependent: :destroy
   has_many :assessments, dependent: :destroy
   has_many :user_progressions, through: :lessons
+  #attr_accessor :skip_validation
   
   has_one_attached :logo
-  validates :logo, attached: true, 
+  validates :logo,
     content_type: ['image/png', 'image/jpg', 'image/jpeg'], 
     size: { less_than: 750.kilobytes , message: 'Logo size must be under 750 kilobytes' }  
 

@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
-  resources :posts do
-    resources :messages, except: [:index]
-  end
+
+  root "init_pages#first"
+  get "first", to: "init_pages#first"
+  get "policy", to: "init_pages#policy"
   devise_for :users
-  resources :video, only: [:show, :update]
-  resources :admissions do
-    get :admitted_students, on: :collection
-  end
+  resources :users, only: [:index, :edit, :show, :update]
   resources :courses do
     get :trending, :registered, :my_courses, :not_approved, on: :collection
     member do
@@ -17,11 +15,14 @@ Rails.application.routes.draw do
     resources :assessments
     resources :admissions, only: [:new, :create]
   end
-  resources :users, only: [:index, :edit, :show, :update]
-  root 'init_pages#first'
-  get 'init_pages/first'
-#get 'init_pages/policy'
-  get 'policy', to: 'init_pages#policy' 
+  resources :admissions do
+    get :admitted_students, on: :collection
+  end
+  resources :posts do
+    resources :messages, except: [:index]
+  end
+  resources :video, only: [:show, :update]
+  
 end
 
 #clean up routes ** improve loading times

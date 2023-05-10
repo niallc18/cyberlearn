@@ -18,15 +18,16 @@ module CoursesHelper
   
   def review_button(course)
     user_course = course.admissions.where(user: current_user)
-    if current_user
+    if current_user  
       if user_course.any?
-        if user_course.review_needed.any?
-          link_to 'Add review', edit_admission_path(user_course.first), class: "btn btn-info btn-sm"
-        else
-          link_to 'Check Review', admission_path(user_course.first), class: "btn btn-info btn-sm"
+        if (course.progression(current_user)).to_i == 100
+          if user_course.review_needed.any?
+            link_to 'Add review', edit_admission_path(user_course.first), class: "btn btn-info btn-sm"
+          else
+            link_to 'Check Review', admission_path(user_course.first), class: "btn btn-info btn-sm"
+          end
         end
       end
     end
   end
-
 end

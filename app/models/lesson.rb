@@ -24,7 +24,6 @@ class Lesson < ApplicationRecord
   
   def seen(user)
     self.user_progressions.where(user: user).present?
-    #self.user_progressions.where(user_id: [user.id], lesson_id: [self.id]).present?
   end
   
 end

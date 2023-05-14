@@ -9,12 +9,11 @@ class Course < ApplicationRecord
   has_many :lessons, dependent: :destroy
   has_many :assessments, dependent: :destroy
   has_many :user_progressions, through: :lessons
-  #attr_accessor :skip_validation
   
   has_one_attached :logo
   validates :logo,
-    content_type: ['image/png', 'image/jpg', 'image/jpeg'], 
-    size: { less_than: 750.kilobytes , message: 'Logo size must be under 750 kilobytes' }  
+    content_type: ["image/png", "image/jpg", "image/jpeg"], 
+    size: { less_than: 750.kilobytes , message: "Logo size must be < 750 kilobytes" }  
 
   scope :trending_courses, -> { limit(3).order(rating_avg: :desc, created_at: :desc) }
   scope :new_courses, -> { limit(3).order(created_at: :desc) }
@@ -26,6 +25,7 @@ class Course < ApplicationRecord
   def to_s
     title
   end
+  
   has_rich_text :description
   
   extend FriendlyId

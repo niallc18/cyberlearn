@@ -8,6 +8,7 @@ class AssessmentsController < ApplicationController
   def show
     authorize @assessment
     @assessments = @course.assessments
+    @lessons = @course.lessons
   end
 
   def new

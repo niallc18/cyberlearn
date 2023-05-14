@@ -7,8 +7,6 @@ RSpec.describe User, type: :model do
       User.delete_all
       @user = User.new(username: "newuser2", email: "newuser2@test.com", password: "password", confirmed_at: nil)
       @nextuser = User.new(username: "new1user", email: "new_user@test.com", password: "password", confirmed_at: nil)
-      token = @user.confirmation_token
-      token = @nextuser.confirmation_token
       @user.confirm
       @nextuser.confirm
     end  
@@ -19,6 +17,10 @@ RSpec.describe User, type: :model do
         expect(@user.confirmed?).to be true
         @user.update_column(:confirmation_token, nil)
         expect(@user.confirmation_token).to be_nil
+      end  
+      it "user remove account" do
+        @user.delete
+        expect(User.count == 1).to be true
       end  
     end
 
@@ -39,3 +41,4 @@ RSpec.describe User, type: :model do
     end
   end
 end
+

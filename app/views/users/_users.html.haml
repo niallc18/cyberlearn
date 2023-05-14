@@ -1,45 +1,33 @@
-//admin panel ** todo: change permissions and css
 %p
 .card
   .card-header
-    .fa.fa-user
-    - if user.online?
-      .text-success.far.fa-circle
-    - else
-      .text-danger.far.fa-circle
-    = link_to user.email, user_path(user)
+    .fa.fa-circle-user
+    = link_to user.username, user_path(user), class: "no-hyper"
   .card-footer
-    Signed up
+    = "Total course sign-ups:"
+    = user.admissions.count
+  .card-footer
+    Account created 
     = time_ago_in_words(user.created_at)
-    ago
+    ago 
   .card-footer
-    %b= 'sign_in_count'.humanize + ":"
-    = user.sign_in_count
-    .row
-    %b= 'current_sign_in_at'.humanize + ":"
-    = user.current_sign_in_at
-    .row
-    %b= 'last_sign_in_at'.humanize + ":"
-    = user.last_sign_in_at
-    .row
-    %b= 'current_sign_in_ip'.humanize + ":"
-    = user.current_sign_in_ip
-    .row
-    %b= 'last_sign_in_ip'.humanize + ":"
-    = user.last_sign_in_ip
-    
+    - if user.has_role?(:admin)
+      .badge.badge-admin
+        Admin
+    - if user.has_role?(:teacher) && !user.has_role?(:admin)
+      .badge.badge-teacher
+        Teacher
+    - if user.has_role?(:student) && !user.has_role?(:teacher) && !user.has_role?(:admin)
+      .badge.badge-student
+        Student
+    %br
+- if policy(user).edit?  
   .card-footer
     Confirmed email?
     - if user.confirmed_at.present?
       %h1 Yes
     - else
       %h1 No
-  .card-footer
-    - user.roles.each do |role|
-      .badge.badge-info
-        = role.name
-      
-    - if policy(user).edit?
-      = link_to 'Edit roles', edit_user_path(user), class: 'btn btn-sm btn-warning'
+    = link_to "Edit roles", edit_user_path(user), class: "btn btn-sm btn-info"
     
     

@@ -34,7 +34,7 @@ class AdmissionsController < ApplicationController
   # POST /admissions or /admissions.json
   def create
       @admission = current_user.admit_course(@course)
-      redirect_to course_path(@course), notice: "Admitted"
+      redirect_to course_path(@course), notice: "Successfully Admitted"
     
   end
 

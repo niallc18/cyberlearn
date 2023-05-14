@@ -2,8 +2,18 @@
   .card-body
     = message.content
   .card-footer
-    .fa.fa-circle-user
-    = link_to message.user.username, user_path(message.user), class: "no-hyper"
     = time_ago_in_words(message.updated_at)
-    ago
+    ago by
+    - if message.user.has_role?(:admin)
+      .badge.badge-admin
+        Admin
+    - if message.user.has_role?(:teacher) && !message.user.has_role?(:admin)
+      .badge.badge-teacher
+        Teacher
+    - if message.user.has_role?(:student) && !message.user.has_role?(:teacher) && !message.user.has_role?(:admin)
+      .badge.badge-student
+        Student
+    = link_to message.user.username, user_path(message.user), class: "no-hyper"
+    %br
+    %br
     = link_to "Delete", [@post, message], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" 

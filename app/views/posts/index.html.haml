@@ -1,10 +1,10 @@
 %p
-%h1  
-  All posts:
-  = @posts.count
+.jumbotron.text-info
+  .display-4
+    Welcome to our community area! 
 %p
 
-= link_to 'Add Post', new_post_path(@posts), class: 'btn btn-primary btn-sm'
+= link_to "Add Post", new_post_path(@posts), class: "btn btn-info btn-sm"
 
 %p
 
@@ -13,13 +13,16 @@
     .main
       - @posts.each do |posts|
         %p
-        = render 'posts/viewpost', posts: posts
+        = render "posts/viewpost", posts: posts
     %p    
     != pagy_bootstrap_nav(@pagy)
+    (Total posts:
+    = @posts.count
+    )
   .col-md-2
     = search_form_for @ransack_posts, as: :posts_search, url: @ransack_path do |f|
       = f.label :search
-      = f.search_field :title_cont, placeholder: 'All Posts', class: 'form-control form-control-sm'
-    = link_to 'Clear', @ransack_path
+      = f.search_field :title_cont, placeholder: "All Posts", class: "form-control form-control-sm" 
+      = link_to "Clear", @ransack_path, class: "btn btn-sm btn-info"
 
 

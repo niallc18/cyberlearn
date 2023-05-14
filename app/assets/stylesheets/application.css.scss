@@ -5,7 +5,7 @@
 
 
 .badge.badge-danger {
-  background-color: red !important;
+  background-color: deepskyblue !important;
   color: white;
 }
 
@@ -16,6 +16,21 @@
 
 .badge.badge-success {
   background-color: green !important;
+  color: white;
+}
+
+.badge.badge-admin {
+  background-color: red !important;
+  color: white;
+}
+
+.badge.badge-teacher {
+  background-color: green !important;
+  color: white;
+}
+
+.badge.badge-student {
+  background-color: blue !important;
   color: white;
 }
 

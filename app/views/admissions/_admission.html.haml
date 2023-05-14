@@ -3,14 +3,20 @@
   .card-header
     .fa.fa-circle-user
     = link_to admission.user.username, user_path(admission.user), class: "no-hyper"
-    = time_ago_in_words(admission.updated_at)
-    ago
   .card-body
-    .text-warning.fa.fa-star
-    %b= admission.rating
-    .fa.fa-comment
-    %small= admission.review
+    %b= "Rating:"
+    - admission.rating.times do
+      .text-warning.fa.fa-star
+    %br
+    %p
+    %b= "Review:"
+    = admission.review
   - if current_user
     .card-footer
+      = time_ago_in_words(admission.updated_at)
+      ago
       - if policy(admission).edit?
-        = link_to 'Edit Review', edit_admission_path(admission), class: "no-hyper"
+        = link_to 'Edit Review', edit_admission_path(admission), class: 'btn btn-sm btn-warning'
+      
+  
+  

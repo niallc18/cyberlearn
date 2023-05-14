@@ -5,17 +5,17 @@ class User < ApplicationRecord
   
   attr_writer :login
   has_many :courses, dependent: :destroy
-  has_many :admissions
-  has_many :user_progressions
+  has_many :admissions, dependent: :destroy
+  has_many :user_progressions, dependent: :destroy
   has_many :posts, dependent: :destroy
-  has_many :messages
+  has_many :messages, dependent: :destroy
   
   def to_s
     email  
   end
 
   extend FriendlyId
-  friendly_id :email, use: :slugged
+  friendly_id :username, use: :slugged
 
   after_create :default_role
 
@@ -47,6 +47,7 @@ class User < ApplicationRecord
     @login || self.username || self.email
   end
   
+  #https://github.com/heartcombo/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if (login = conditions.delete(:login))

@@ -6,10 +6,19 @@
     .card-body-custom.h-100.bg-light  
       .card-info.mt-2.px-2
         = truncate(posts.description.body.to_plain_text, length: 75, separator: '')
-        %a{ href: post_path(posts), class: "no-hyper" } Continue reading
+        %a{ href: post_path(posts), class: "no-hyper" } Continue reading?
     .card-footer
-      Created by:
-      .fa.fa-circle-user
+      = time_ago_in_words(posts.updated_at)
+      ago by
+      - if posts.user.has_role?(:admin)
+        .badge.badge-admin
+          Admin
+      - if posts.user.has_role?(:teacher) && !posts.user.has_role?(:admin)
+        .badge.badge-teacher
+          Teacher
+      - if posts.user.has_role?(:student) && !posts.user.has_role?(:teacher) && !posts.user.has_role?(:admin)
+        .badge.badge-student
+          Student
       = link_to posts.user.username, user_path(posts.user), class: "no-hyper"
       %br
       .fa.fa-message
@@ -18,5 +27,5 @@
     
     - if policy(posts).edit?    
       .card-footer
-        = link_to 'Edit', edit_post_path(posts), class: 'btn btn-sm btn-warning'
-        = link_to 'Delete', [posts], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
+        = link_to "Edit", edit_post_path(posts), class: "btn btn-sm btn-warning"
+        = link_to "Delete", [posts], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger"

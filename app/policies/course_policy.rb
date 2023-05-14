@@ -6,7 +6,7 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def show?
-    @record.approval || @user.has_role?(:admin) && @user.present? || @user.present? && @record.user_id == @user.id 
+    @record.approval || @user.has_role?(:admin) || @user.present? && @record.user_id == @user.id 
   end
 
   def edit?

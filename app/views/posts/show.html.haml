@@ -10,12 +10,24 @@
     .card
       .card-header
         %h2= @post.title
+        - if policy(@post).edit?
+          = link_to 'Edit', edit_post_path(@post), class: 'btn btn-sm btn-warning'
+          = link_to 'Delete', [@post], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
       .card-body.bg-light
         = @post.description
-    - if policy(@post).edit?
       .card-footer
-        = link_to 'Edit', edit_post_path(@post), class: 'btn btn-sm btn-warning'
-        = link_to 'Delete', [@post], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
+        = time_ago_in_words(@post.updated_at)
+        ago by
+        - if @post.user.has_role?(:admin)
+          .badge.badge-admin
+            Admin
+        - if @post.user.has_role?(:teacher) && !@post.user.has_role?(:admin)
+          .badge.badge-teacher
+            Teacher
+        - if @post.user.has_role?(:student) && !@post.user.has_role?(:teacher) && !@post.user.has_role?(:admin)
+          .badge.badge-student
+            Student
+        = link_to @post.user.username, user_path(@post.user), class: "no-hyper"
 
 %p        
 .fa.fa-message

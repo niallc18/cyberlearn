@@ -17,7 +17,7 @@ class Admission < ApplicationRecord
   
 
   def to_s
-    user.to_s + " " + course.to_s
+    (user.username).to_s 
   end
   
   after_save do

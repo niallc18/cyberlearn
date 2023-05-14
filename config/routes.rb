@@ -25,4 +25,3 @@ Rails.application.routes.draw do
   
 end
 
-#clean up routes ** improve loading times

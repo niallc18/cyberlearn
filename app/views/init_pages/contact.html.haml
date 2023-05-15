@@ -1,0 +1,14 @@
+%p
+.jumbotron.text-info
+  .display-4
+    Want to become a creator for CyberLearn?
+  
+%p  
+.alert.alert-success{ role: 'alert' }
+  .alert-heading
+    = "Enquire now: " 
+    =mail_to 'cyber.learn.fyp@gmail.com'  
+
+%br
+%p
+= link_to "Back to home", root_path, class: "btn btn-sm btn-info"

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root "init_pages#first"
   get "first", to: "init_pages#first"
   get "policy", to: "init_pages#policy"
+  get "contact", to: "init_pages#contact"
   devise_for :users, :controllers => { registrations: "registrations", sessions: "sessions"}
   resources :users, only: [:index, :edit, :show, :update]
   resources :courses do

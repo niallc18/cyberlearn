@@ -3,6 +3,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable, :confirmable, authentication_keys: [:login]
   rolify   
   
+  validates :username, uniqueness: true, presence: true
+  
   attr_writer :login
   has_many :courses, dependent: :destroy
   has_many :admissions, dependent: :destroy

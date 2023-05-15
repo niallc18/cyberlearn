@@ -32,8 +32,9 @@ gem "ransack"
 gem "pundit"
 gem "rolify"
 gem "aws-sdk-s3", require: false
-gem 'ranked-model'
-gem 'jquery-rails'
+gem "ranked-model"
+gem "jquery-rails"
+gem "recaptcha"
 
 
 # Use Active Storage variant

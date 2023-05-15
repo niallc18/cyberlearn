@@ -216,6 +216,7 @@ GEM
     rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    recaptcha (5.14.0)
     regexp_parser (2.5.0)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -329,6 +330,7 @@ DEPENDENCIES
   rails (~> 6.1.0)
   ranked-model
   ransack
+  recaptcha
   rolify
   rspec-rails
   sass-rails (>= 6)

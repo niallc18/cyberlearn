@@ -20,7 +20,11 @@
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
   </div>
-
+  
+  <p></p>
+  <%= recaptcha_tags %>
+  <p></p>
+  
   <div class="form-actions">
     <%= f.button :submit, "Sign up" %>
   </div>

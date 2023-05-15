@@ -48,6 +48,8 @@
                 = link_to my_courses_courses_path, class: "dropdown-item" do
                   .fa.fa-graduation-cap
                   My Courses
+                  .badge.badge-danger
+                    = current_user.courses.count
                 = link_to admitted_students_admissions_path, class: "dropdown-item" do
                   .fa.fa-users
                   Students

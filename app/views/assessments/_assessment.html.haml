@@ -11,7 +11,7 @@
 
 %p
  
-- if (@course.progression(current_user)).to_i == 100 
+- if (@course.progression(current_user)).to_i == 100 || policy(assessment).edit?
   %button#answers-toggle Show Answers
   %p
   #answers{ style: 'display: none;' }

@@ -18,6 +18,6 @@ class AdmissionPolicy < ApplicationPolicy
   end
 
   def destroy?
-    @user.has_role?(:admin)
+    @user.has_role?(:admin) || @record.user_id == @user.id
   end
 end

@@ -8,7 +8,9 @@
       .card-img-top
         = image_tag course.logo, height: "200px", width: "400px"
     .card-body.bg-light
-      = course.description
+      //= course.description
+      = truncate(course.description.body.to_plain_text, length: 200, separator: '')
+      %a{ href: course_path(course), class: "no-hyper" } Continue reading?
     .card-footer
       .fa.fa-book
       Lessons:
@@ -66,5 +68,9 @@
             = link_to "Revoke", revoke_course_path(course), method: :patch, class: "btn btn-sm btn-danger"
           - else
             = link_to 'Approve', approve_course_path(course), method: :patch, class: "btn btn-sm btn-success"
-        
+      - if policy(course).creator?
+        - if course.approval == false
+          .card-footer
+            .badge.badge-admin
+              Waiting for approval
       %p

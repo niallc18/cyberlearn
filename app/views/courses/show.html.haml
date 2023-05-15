@@ -4,12 +4,15 @@
 = link_to @course.title, course_path(@course), class: "no-hyper"
 %p
 .row
-  .col-lg-7
+  .col-lg-7{style: " border: 1px solid #01B7EA; "}
     .jumbotron
+    %p
     %h1
       = @course.title
+    %hr.text-info
     %h4
       = @course.description
+    %hr.text-info
     %br
     %h4
       Lessons:
@@ -45,7 +48,7 @@
       .progress
         .progress-bar{role: 'progressbar', style: "width: #{number_to_percentage(@course.progression(current_user), precision: 0)};"}
           = number_to_percentage(@course.progression(current_user), precision: 0)  
-    %p
+      %br
     
   .col-lg-5
     %p

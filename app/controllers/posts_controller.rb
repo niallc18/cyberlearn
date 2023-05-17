@@ -1,5 +1,8 @@
+# controller for posts
+# authorize actions from post policy corresponds to views
+# ransack for searching posts within index view
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @ransack_path = posts_path

@@ -1,3 +1,7 @@
+# default policies for application, initialize user and record, set scope
+# Reference: https://github.com/corsego
+# Reference: https://github.com/varvet/pundit
+# Reference: https://github.com/RolifyCommunity/rolify
 class ApplicationPolicy
   attr_reader :user, :record
 

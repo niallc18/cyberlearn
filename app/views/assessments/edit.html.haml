@@ -1,9 +1,10 @@
+// Edit view for an assessment, renders form to update assessment
 .card
   .card-header
     %h1 Editing assessment
   .card-body
-    = render 'form'
+    = render "form"
   .card-footer
-    = link_to 'Show assessment', course_assessment_path(@course, @assessment)
+    = link_to "Show assessment", course_assessment_path(@course, @assessment)
     \|
-    = link_to 'Back to course', course_path(@assessment.course)
+    = link_to "Back", course_path(@assessment.course)

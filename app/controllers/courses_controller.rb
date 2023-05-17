@@ -1,3 +1,6 @@
+# Reference: https://github.com/corsego/corsego
+# define methods from scope to use in dropdowns within navbar, ransack and pagy used for searching the index of a course and pagy for seperating into pages
+# skip before action method allows user for the show action, meaning no authentication required to see a course page
 class CoursesController < ApplicationController
   skip_before_action :authenticate_user!, :only => [:show]
   before_action :set_course, only: [:show, :edit, :update, :destroy, :approve, :revoke]
@@ -35,7 +38,7 @@ class CoursesController < ApplicationController
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
     render 'index'
   end
-
+  # methods approve and revoke only available to admin, updating the attribute to either true or false
   def approve
     authorize @course, :approve?
     @course.update_attribute(:approval, true)
@@ -50,9 +53,11 @@ class CoursesController < ApplicationController
 
   def show
     authorize @course
+    # rank lessons using ranked model gem, sorting all lessons for an instance of a course
     @lessons = @course.lessons.rank(:row_order).all
     @assessments = @course.assessments
     @admissions_review = @course.admissions.has_review
+    # use has review scope for displaying a review from an admitted user
   end
   
   def new

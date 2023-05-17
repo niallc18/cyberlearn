@@ -1,3 +1,4 @@
+# assessment model using rich text for answers and questions
 class Assessment < ApplicationRecord
   belongs_to :course
   
@@ -5,7 +6,7 @@ class Assessment < ApplicationRecord
   
   has_rich_text :answers
   has_rich_text :questions
-  
+  # assessment title is used for the URL instead of ID
   extend FriendlyId
   friendly_id :to_s, use: :slugged
   

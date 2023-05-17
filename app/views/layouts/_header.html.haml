@@ -1,3 +1,7 @@
+// Reference: https://github.com/corsego
+// Reference: https://github.com/bokmann/font-awesome-rails (Gem)
+// Bootstrap used for responsive navbar that can collapse on smaller screens using data-bs-toggle
+// pundit and rolify gem is used heavily to indicate which users can see certain parts of the navbar e.g. admin can see sysadmin dropdown
 %nav.navbar.navbar-expand-lg.navbar-dark.bg-info.d-flex.text-center
   .container
     %a.navbar-brand{:href => "/"}
@@ -96,3 +100,4 @@
         %ul.navbar-nav
           %li.nav-item= link_to 'Sign Up', new_user_registration_path, class: 'nav-link'
           %li.nav-item= link_to 'Log In', new_user_session_path, class: 'nav-link'
+          // for users not logged in

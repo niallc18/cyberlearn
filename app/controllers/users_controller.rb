@@ -1,3 +1,7 @@
+# define actions for users, using pundit gem to determine which users can have access to certain actions, corresponding to views
+# rolify gem user must have a role
+# ransack for indexing all users
+# Reference: https://github.com/corsego/corsego
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   def index

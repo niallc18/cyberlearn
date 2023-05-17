@@ -1,3 +1,4 @@
+// Reference: https://github.com/heartcombo/simple_form (Gem)
 = simple_form_for([@post, @message]) do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?

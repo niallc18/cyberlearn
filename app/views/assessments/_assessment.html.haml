@@ -1,3 +1,7 @@
+// View for assessment
+// JavaScript used to hide answers based on conditional statement, user progression must equal one hundred OR be the course creator.
+// Alert is shown indicating all lessons haven't been viewed, therefore can't show answers
+// Fix for unresponsive show answer button in ../js/reload-fix.js
 %p
 .card
   .card-header
@@ -18,7 +22,7 @@
     .card
       .card-body
         %p.card-text= @assessment.answers.body.to_plain_text
-  
+  // https://stackoverflow.com/questions/69214764/on-a-rails-6-view-how-can-i-add-an-event-listener-on-a-button-which-hides-and-u
   :javascript
     const button = document.querySelector('#answers-toggle');
     const answers = document.querySelector('#answers');

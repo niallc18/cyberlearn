@@ -1,3 +1,4 @@
+//Editing the review, renders form partial.
 .card
   .card-header
     %h3
@@ -7,10 +8,10 @@
       
     %p
   .card-body
-    = render 'form'
+    = render "form"
   .card-footer
 
 
-= link_to 'Show Reviews', @admission
-\|
-= link_to 'Back', course_path(@admission.course)
+= link_to "Show Reviews", @admission, class: "btn btn-info"
+%p
+= link_to "Back", course_path(@admission.course), class: "btn btn-info"

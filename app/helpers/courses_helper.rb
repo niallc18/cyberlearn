@@ -1,3 +1,8 @@
+# user can only review a course if progression of all lessons is completed
+# admission button for signed in user
+# my progression button stating current progression if the user is admitted to the course
+# using review needed scope, add review or check review is available 
+# Reference: https://github.com/corsego/corsego
 module CoursesHelper
   def admission_button(course)
     if current_user
@@ -22,9 +27,9 @@ module CoursesHelper
       if user_course.any?
         if (course.progression(current_user)).to_i == 100
           if user_course.review_needed.any?
-            link_to 'Add review', edit_admission_path(user_course.first), class: "btn btn-info btn-sm"
+            link_to "Add review", edit_admission_path(user_course.first), class: "btn btn-info btn-sm"
           else
-            link_to 'Check Review', admission_path(user_course.first), class: "btn btn-info btn-sm"
+            link_to "Check Review", admission_path(user_course.first), class: "btn btn-info btn-sm"
           end
         end
       end

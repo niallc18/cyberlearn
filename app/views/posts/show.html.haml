@@ -1,3 +1,6 @@
+// the show view for when a user selects a post
+// prefix sorting for user role
+// messages shown below post acting as replies
 %p
 = link_to 'Forum', posts_path, class: "no-hyper"
 \/
@@ -11,8 +14,8 @@
       .card-header
         %h2= @post.title
         - if policy(@post).edit?
-          = link_to 'Edit', edit_post_path(@post), class: 'btn btn-sm btn-warning'
-          = link_to 'Delete', [@post], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
+          = link_to "Edit", edit_post_path(@post), class: "btn btn-sm btn-warning"
+          = link_to "Delete", [@post], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger"
       .card-body.bg-light
         = @post.description
       .card-footer
@@ -35,7 +38,7 @@ Replies:
 = @messages.count
 - @messages.each do |message|
   %p
-  = render 'posts/messages/message', message: message
+  = render "posts/messages/message", message: message
 %hr
-= render 'posts/messages/form'
+= render "posts/messages/form"
 

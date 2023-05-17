@@ -1,15 +1,18 @@
+# Reference: https://github.com/corsego/corsego
 class AdmissionsController < ApplicationController
-  before_action :set_admission, only: %i[ show edit update destroy ]
+  before_action :set_admission, only: [:show, :edit, :update, :destroy]
   before_action :set_course, only: [:new, :create]
 
-  # GET /admissions or /admissions.json
-  def index
+  # Index action
+  # Set admission path as ransack path
+  # Include pagy in admission index // q for value in search
+  def index 
     @ransack_path = admissions_path
     @q = Admission.ransack(params[:q])
     @pagy, @admissions = pagy(@q.result.includes(:user))
     authorize @admissions
   end
-  
+  # search for students admitted to a course created by admin or teacher
   def admitted_students
     @ransack_path = admitted_students_admissions_path
     @q = Admission.joins(:course).where(courses: {user: current_user}).ransack(params[:q])
@@ -64,7 +67,7 @@ class AdmissionsController < ApplicationController
     def set_admission
       @admission = Admission.friendly.find(params[:id])
     end
-
+    # only allow rating and review for input
     def admission_params
       params.require(:admission).permit(:rating, :review)
     end

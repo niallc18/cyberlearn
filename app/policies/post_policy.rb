@@ -1,3 +1,4 @@
+# policies defined for posts
 class PostPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve

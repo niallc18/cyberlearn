@@ -1,3 +1,8 @@
+// if a user has is registered and has seen the lesson, circle green, otherwise its red
+// set ranking of lessons using rank_model gem
+// Reference: https://github.com/brendon/ranked-model
+// Reference: https://github.com/corsego
+
 - if current_user    
   - if lesson.course.admitted(current_user) || @course.user == current_user
     - if lesson.seen(current_user) == true
@@ -12,7 +17,7 @@
   = link_to course_lesson_path(@course, lesson), class: "no-hyper" do 
     = lesson.set_position
     = lesson.title
-    
+  // user can access edit and destroy with permissions defined in lesson_policy  
   .card-footer
     - if policy(lesson).edit?
       = link_to 'Edit', edit_course_lesson_path(@course, lesson), class: 'btn btn-sm btn-warning'

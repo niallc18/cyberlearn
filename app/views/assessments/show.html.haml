@@ -1,3 +1,5 @@
+// Reference: https://github.com/corsego
+// Reference: https://github.com/bokmann/font-awesome-rails (Gem)
 %p
 = link_to "Courses", courses_path, class: "no-hyper"
 \/
@@ -6,6 +8,11 @@
 = link_to @assessment.title, course_assessment_path(@course, @assessment), class: "no-hyper"
 
 %p
+// render assessment partial
+// using bootstrap, set a row and column for assessments and lessons
+// using bootstrap display the progression as a progress bar, as an integer
+// highlight lesson/assessment the user is currently on, and list the others in a group.
+// first column is on the left of the screen and is larger as it is displaying content, the other column on the right showing the list of other lessons / assessments
 .row
   .col-lg-9
     = render "assessments/assessment", assessment: @assessment

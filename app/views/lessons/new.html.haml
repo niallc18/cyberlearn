@@ -1,9 +1,10 @@
-//todo: edit css
+// new lesson view
+// Reference: https://github.com/corsego
 %p
 .card
   .card-header
     %h1 Create lesson
   .card-body
-    = render 'form'
+    = render "form"
   .card-footer
-    = link_to 'Back to course', course_path(@course)
+    = link_to "Back to course", course_path(@course), class: "btn btn-info" 

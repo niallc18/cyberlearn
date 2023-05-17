@@ -1,6 +1,8 @@
+# Reference: https://github.com/RolifyCommunity/rolify
+# Reference: https://github.com/corsego
 class Role < ApplicationRecord
   has_and_belongs_to_many :users, :join_table => :users_roles
-
+  #associated with users_roles
   belongs_to :resource,
              :polymorphic => true,
              :optional => true

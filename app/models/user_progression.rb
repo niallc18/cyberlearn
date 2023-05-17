@@ -1,3 +1,5 @@
+# Progression connecting a user and a lesson, validate the id for user and lesson, cant be two of the same user counted for progression of a single lesson
+# Reference: https://github.com/corsego
 class UserProgression < ApplicationRecord
   
   belongs_to :user

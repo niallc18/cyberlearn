@@ -1,3 +1,5 @@
+# generated for recaptcha 
+# Reference: https://github.com/heartcombo/devise/wiki/How-To:-Use-Recaptcha-with-Devise
 class SessionsController < Devise::SessionsController
   prepend_before_action :check_captcha, only: [:create] 
 

@@ -1,3 +1,5 @@
+# message controller setting the id of a message on a specific id of a post, acting as a reply
+# friendly id for easier searching, e.g. post title can be searched instead of id being used
 class MessagesController < ApplicationController
 
   def create

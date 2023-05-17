@@ -1,14 +1,14 @@
+# controller for lessons, defining actions and permissions set in lesson policy
+# assessments in the show action so in a view they can both be displayed
+# associations for course, each lesson is apart of a course, hence the definitions including @course
+# Reference: https://github.com/corsego/corsego
 class LessonsController < ApplicationController
   before_action :set_lesson, only: [:show, :edit, :update, :destroy]
 
-  # GET /lessons
-  # GET /lessons.json
   def index
     @lessons = Lesson.all
   end
 
-  # GET /lessons/1
-  # GET /lessons/1.json
   def show
     authorize @lesson
     current_user.lesson_seen(@lesson)
@@ -16,18 +16,14 @@ class LessonsController < ApplicationController
     @assessments = @course.assessments
   end
 
-  # GET /lessons/new
   def new
     @lesson = Lesson.new
     @course = Course.friendly.find(params[:course_id])
   end
 
-  # GET /lessons/1/edit
   def edit
   end
 
-  # POST /lessons
-  # POST /lessons.json
   def create
     @lesson = Lesson.new(lesson_params)
     @course = Course.friendly.find(params[:course_id])
@@ -44,8 +40,6 @@ class LessonsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /lessons/1
-  # PATCH/PUT /lessons/1.json
   def update
     respond_to do |format|
       if @lesson.update(lesson_params)
@@ -58,8 +52,6 @@ class LessonsController < ApplicationController
     end
   end
 
-  # DELETE /lessons/1
-  # DELETE /lessons/1.json
   def destroy
     @lesson.destroy
     respond_to do |format|
@@ -75,7 +67,7 @@ class LessonsController < ApplicationController
       @lesson = Lesson.friendly.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    # Only title and info allowed through
     def lesson_params
       params.require(:lesson).permit(:title, :info)
     end

@@ -1,3 +1,6 @@
+// View for a review // rating, shown in course show view 
+// FontAwesome gem for repeating start depending on rating value e.g. 4 rating shows 4 stars
+// Edit review only shown depending on edit permissions set in admission_policy.rb
 %p
 .card
   .card-header
@@ -16,7 +19,7 @@
       = time_ago_in_words(admission.updated_at)
       ago
       - if policy(admission).edit?
-        = link_to 'Edit Review', edit_admission_path(admission), class: 'btn btn-sm btn-warning'
+        = link_to "Edit Review", edit_admission_path(admission), class: "btn btn-sm btn-warning"
       
   
   

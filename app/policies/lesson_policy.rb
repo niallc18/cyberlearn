@@ -1,3 +1,5 @@
+# policies defined for lessons
+# Reference: https://github.com/corsego
 class LessonPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve

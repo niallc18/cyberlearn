@@ -1,3 +1,5 @@
+# user policies
+# Reference: https://github.com/corsego
 class UserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve

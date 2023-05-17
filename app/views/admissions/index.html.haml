@@ -1,72 +1,69 @@
+//Reference: https://github.com/corsego
+//Reference: https://github.com/ddnexus/pagy (Gem)
+//Reference: https://github.com/activerecord-hackery/ransack (Gem)
+//Reference: https://github.com/heartcombo/simple_form (Gem)
+%p
 %h3
   .text-center
     Admissions
-    .badge.badge-info
-      = @admissions.count
+%p
+// Search form using ransack gem, referring to ransack path set in admissions controller index action
+// q defined in index, stores value
+= search_form_for @q, url: @ransack_path do |f|
+  = f.search_field :user_username_cont, placeholder: "username"
+  = f.search_field :course_title_cont, placeholder: "course title"
+  = f.search_field :price_eq, placeholder: "cost"
+  = f.search_field :rating_eq, placeholder: "rating"
+  = f.search_field :review_cont, placeholder: "review"
+  = f.button "Search", class: "btn btn-info"
+  = link_to "Clear", @ransack_path, class: "btn btn-info"  
 %p
 
-= search_form_for @q, url: @ransack_path do |f|
-  = f.search_field :user_email_cont, placeholder: 'user email'
-  = f.search_field :course_title_cont, placeholder: 'course title'
-  = f.search_field :price_eq, placeholder: 'cost'
-  = f.search_field :rating_eq, placeholder: 'rating'
-  = f.search_field :review_cont, placeholder: 'review'
-  = f.submit
-= link_to 'refresh', @ransack_path
-
+// Layout of table, bootstrap used for responsiveness.
+// headings for table
 .table-responsive
   %table.table.table-bordered.table-striped.table-sm
     %thead
       %tr
-        %th ID
+        %th 
+          = sort_link(@q, :user_username)
         %th
           = sort_link(@q, :user_email)
-          /.fa.fa-user
-          /User
         %th
           = sort_link(@q, :created_at)
-          /.fa.fa-clock
-          /.fa.fa-lock-open
-          /date 
         %th
           = sort_link(@q, :course_title)
-          /.fa.fa-graduation-cap
-          /Course name
         %th 
           = sort_link(@q, :cost)
-          /.fa.fa-dollar-sign
-          /Cost
         %th 
           = sort_link(@q, :updated_at)
-          /.row
-          /.text-warning.fa.fa-clock
-          /Updated
         %th 
           = sort_link(@q, :rating)
-          /.text-warning.fa.fa-star
-          /Rating
         %th 
           .text-warning.fa.fa-comment
           Review
         %th
         %th
         %th
-  
     %tbody
       - @admissions.each do |admission|
         %tr
-          %td= admission.id
+          %td= link_to admission.user.username, user_path(admission.user)
           %td= link_to admission.user, user_path(admission.user)
-          %td= admission.created_at.strftime("%d/%b/%Y, %H:%M")
+          %td= admission.created_at.strftime("%d/%b/%Y")
           %td= link_to admission.course, course_path(admission.course)
           %td= admission.course.details
           %td
             - if admission.rating.present?
-              = admission.updated_at.strftime("%d/%b/%Y, %H:%M")
+              = admission.updated_at.strftime("%d/%b/%Y")
           %td= admission.rating
           %td= admission.review
-          %td= link_to 'See Review', admission
-          %td= link_to 'Add Review', edit_admission_path(admission)
-          %td= link_to 'Delete admission', admission, method: :delete, data: { confirm: 'Are you sure?' }
+          %td= link_to "See Review", admission, class: "btn btn-info"  
+          %td= link_to "Add Review", edit_admission_path(admission), class: "btn btn-info"  
+          %td= link_to "Delete admission", admission, method: :delete, class: "btn btn-info", data: { confirm: "Are you sure?" }
+          // Content for table  
+          
+          
+// Pagy gem for page seperation
 != pagy_bootstrap_nav(@pagy)
 %br

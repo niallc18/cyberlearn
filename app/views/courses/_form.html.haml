@@ -1,5 +1,7 @@
+// Bootstrap for design of the form, this view allows the user to input info for the course, this is rendered in edit and new view.
+// Reference: https://github.com/heartcombo/simple_form (Gem)
+// Reference: https://github.com/corsego
 .container
-  -# frozen_string_literal: true
   = simple_form_for(@course) do |f|
     = f.error_notification
     = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
@@ -11,7 +13,7 @@
       - if @course.logo.attached?
         = image_tag @course.logo, width: "200px"
         = @course.logo.filename
-        
+        // Attach logo and state name of attached file with set width
       .row
       = f.file_field :logo 
       %small= f.error :logo, class: 'text-danger'
@@ -21,7 +23,7 @@
       = f.rich_text_area :description
       = f.input :details, collection: Course.details
       = f.input :stage, collection: Course.stage
-
+      // Dropdown for details and stage e.g. newbie, amateur, and expert
     %p
     .form-actions
       = f.button :submit

@@ -1,5 +1,6 @@
+# model for forum
 class Post < ApplicationRecord
-  
+  # associated with a user and can have many messages, if a post is deleted, all messages associated with post are deleted
   belongs_to :user
   has_many :messages, dependent: :destroy
   validates :title, presence: true, length: {:maximum => 50}
@@ -13,9 +14,5 @@ class Post < ApplicationRecord
   def to_s
     title
   end
-  
-  def username
-    self.email.split(/@/).first
-  end
-  
+
 end

@@ -1,5 +1,7 @@
+# assessments belong to a course and lessons must be visibled on the show view, hence the definition of course and lessons
+# pundit permissions set in the assessment policy
 class AssessmentsController < ApplicationController
-  before_action :set_assessment, only: %i[ show edit update destroy ]
+  before_action :set_assessment, only: [:show, :edit, :update, :destroy]
 
   def index
     @assessments = Assessment.all

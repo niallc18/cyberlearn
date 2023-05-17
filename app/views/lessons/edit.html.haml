@@ -1,10 +1,12 @@
-//todo: edit css
+// edit view for a lesson
+// render form view
+// Reference: https://github.com/corsego
 .card
   .card-header
     %h1 Editing lesson
   .card-body
-    = render 'form'
+    = render "form"
   .card-footer
-    = link_to 'Show lesson', course_lesson_path(@course, @lesson)
+    = link_to "Show lesson", course_lesson_path(@course, @lesson), class: "btn btn-info" 
     \|
-    = link_to 'Back to course', course_path(@lesson.course)
+    = link_to "Back to course", course_path(@lesson.course), class: "btn btn-info" 

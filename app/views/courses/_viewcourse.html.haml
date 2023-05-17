@@ -1,3 +1,7 @@
+// Reference: https://github.com/bokmann/font-awesome-rails (Gem)
+// Reference: https://github.com/corsego
+// Main card for a course, this view is used throughout the app and displays the important info about a course
+// More styling included in application.css.scss
 .main
   .card-container.text-dark.bg-muted.mb-3
     .row.no-gutters
@@ -5,10 +9,11 @@
       .fa.fa-book
       = link_to course.title, course_path(course), class: "no-hyper"
     - if course.logo.attached?
+      // fill image at top of card
       .card-img-top
         = image_tag course.logo, height: "200px", width: "400px"
+    // shorten the length of the description to fit the box, include link to continue reading, limit is 200 char
     .card-body.bg-light
-      //= course.description
       = truncate(course.description.body.to_plain_text, length: 200, separator: '')
       %a{ href: course_path(course), class: "no-hyper" } Continue reading?
     .card-footer
@@ -38,6 +43,7 @@
       Published:
       = course.created_at.strftime('%d-%b-%Y')
     .card-footer
+      // set prefix depending on user role
       .fa.fa-chalkboard-teacher
       Course Created by:
       - if course.user.has_role?(:admin)
@@ -52,6 +58,7 @@
       = link_to course.user.username, user_path(course.user), class: "no-hyper"
     - if current_user
       - if policy(course).creator?
+        // user can only have access to toolbox if they have permissions as a creator of the course, defined in course_policy.rb
         .card-footer
           %div.dropdown
             %button.btn.btn-info.dropdown-toggle{"type" => "button", "id" => "dropdownMenuButton", "data-bs-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false"}
@@ -63,6 +70,7 @@
               - if policy(course).approve? 
                 = link_to "Delete Course", course, method: :delete, data: { confirm: "Confirm?" }, class: "dropdown-item"
       - if policy(course).approve?
+        // only admin can see the approve and revoke buttons, defined in course_policy.rb
         .card-footer
           - if course.approval?
             = link_to "Revoke", revoke_course_path(course), method: :patch, class: "btn btn-sm btn-danger"

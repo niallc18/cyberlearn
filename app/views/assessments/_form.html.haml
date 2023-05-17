@@ -1,4 +1,6 @@
--# frozen_string_literal: true
+// Reference: https://github.com/heartcombo/simple_form (Gem)
+// Reference: https://github.com/corsego
+// ActionText for questions and answers, defined in the assessment model
 = simple_form_for([@course, @assessment]) do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?

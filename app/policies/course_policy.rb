@@ -1,3 +1,7 @@
+# policies defined for courses
+# Reference: https://github.com/corsego
+# Reference: https://github.com/varvet/pundit
+# Reference: https://github.com/RolifyCommunity/rolify
 class CoursePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve

@@ -1,3 +1,5 @@
+//Reference: https://github.com/corsego
+//Reference: https://github.com/heartcombo/simple_form (Gem)
 .container
   = simple_form_for(@admission) do |f|
     = f.error_notification
@@ -6,6 +8,6 @@
     .form-inputs
       = f.input :rating, collection: 1..5
       = f.input :review
-  
+      // User can input rating from 1-5 and input review as text
     .form-actions
       = f.button :submit

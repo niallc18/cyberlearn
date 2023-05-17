@@ -1,9 +1,13 @@
+//Reference: https://github.com/corsego
+//Reference: https://github.com/ddnexus/pagy (Gem)
+//Reference: https://github.com/activerecord-hackery/ransack (Gem)
+//Reference: https://github.com/heartcombo/simple_form (Gem)
 %p
 .jumbotron.text-info
   .display-4
     Find the perfect course for you...
 %p
-
+//Search courses using ransack, defined in courses controller index action
 .form-inline
   = search_form_for @ransack_courses, as: :courses_search, url: @ransack_path do |f|
     = f.label :Course
@@ -19,9 +23,10 @@
     = f.select :stage_cont, Course.stage, include_blank: "None"
     %br
     %p
-    = f.button "Search", class: 'btn btn-info'
+    = f.button "Search", class: "btn btn-info"
     = link_to "Clear", @ransack_path, class: "btn btn-info"  
 %p
+//Render course cards to show on index view, pagy for page seperation, 5 per page.
 .row
   .col-md-12
     .main

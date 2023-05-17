@@ -1,3 +1,7 @@
+# policies defined for admissions
+# Reference: https://github.com/corsego
+# Reference: https://github.com/varvet/pundit
+# Reference: https://github.com/RolifyCommunity/rolify
 class AdmissionPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve

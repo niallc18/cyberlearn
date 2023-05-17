@@ -1,3 +1,4 @@
+# Reference: https://github.com/corsego
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable, :confirmable, authentication_keys: [:login]
@@ -6,6 +7,7 @@ class User < ApplicationRecord
   validates :username, uniqueness: true, presence: true
   
   attr_writer :login
+  #associations
   has_many :courses, dependent: :destroy
   has_many :admissions, dependent: :destroy
   has_many :user_progressions, dependent: :destroy
@@ -15,12 +17,12 @@ class User < ApplicationRecord
   def to_s
     email  
   end
-
+  # set the url to end in the username instead of ID
   extend FriendlyId
   friendly_id :username, use: :slugged
 
   after_create :default_role
-
+  # by default the first ever user to sign up is given all roles, after the first user all other users are given just the student role
   def default_role
     if User.count == 1
       self.add_role(:admin) if self.roles.blank? #admin for initial user
@@ -30,21 +32,18 @@ class User < ApplicationRecord
       self.add_role(:student) if self.roles.blank?
     end
   end
-  
-  def online?
-    updated_at > 5.minutes.ago
-  end
-
+  #admission for a course method
   def admit_course(course)
     self.admissions.create(course: course, price: course.details)
   end
-  
+  # method for has a user seen this lesson, user_progressions updates this
   def lesson_seen(lesson)
     unless self.user_progressions.where(lesson: lesson).any?
       self.user_progressions.create(lesson: lesson)
     end
   end
   
+  # login method for username or email referenced below
   def login
     @login || self.username || self.email
   end
@@ -58,7 +57,7 @@ class User < ApplicationRecord
       where(conditions.to_h).first
     end
   end
-
+  # a user must have a role
   validate :need_role, on: :update
 
   private

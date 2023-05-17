@@ -16,6 +16,7 @@
  Run following commands in terminal for installing Ruby, Yarn, and postgresql:
  ```
 rvm install ruby-2.7.2
+gem install rails -v 6.1.0
 rvm --default use 2.7.2
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list

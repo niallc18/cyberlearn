@@ -3,7 +3,8 @@
 - URN: nc00627
 
 ## Deployed web application using ROR & Heroku
-![image](https://github.com/niallc18/cyberlearn/assets/109161441/0a8b94d2-3479-492f-9a30-7092ddc40fd2)
+![image](https://github.com/niallc18/cyberlearn/assets/109161441/6c2f0a07-f09d-4e73-b524-a51674232298)
+
 
 - URL: https://cyberlearnv1.herokuapp.com/
 - For access to admin, teacher, and student accounts, please contact me, as this application is specifically built for a university final year project, and not for public use.

@@ -62,12 +62,12 @@ rails db:migrate
 rails s
 
 ```
-May also need to change configuration file and change host address and region according to your AWS account setup.
-
+- May also need to change configuration file and change host address and region according to your AWS account setup.
+- Contact niallftw18@gmail.com for any help with setup.
 
 ## Testing instructions
 
-- Once the application is running, use the following commands to run all the tests using Rspec gem.
+- Once the application is setup, use the following commands to run all the tests using Rspec gem.
 
 ```
 cd /cyberlearn/spec
@@ -84,7 +84,15 @@ rails spec
 - https://github.com/bc2mighty/Rails-Project-Management-App 
 - Also special thanks to my supervisor for continously helping me with this project throughout the year!
 
-
+### Following gems used within this project, and more included in the gemfile.
+- https://github.com/rspec/rspec-rails
+- https://github.com/varvet/pundit
+- https://github.com/RolifyCommunity/rolify
+- https://github.com/heartcombo/simple_form
+- https://github.com/activerecord-hackery/ransack
+- https://github.com/bokmann/font-awesome-rails
+- https://github.com/norman/friendly_id
+- https://github.com/brendon/ranked-model
 
 
 
